@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laboratoire SAADA - Analyses Médicales Kénitra | مختبر السعادة</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        saada: {
+                            blue: '#0047AB',
+                            deepBlue: '#002D72',
+                            teal: '#00A896',
+                            cyan: '#00B4D8',
+                            red: '#E63946',
+                            redHover: '#D62828',
+                            lightBg: '#F4F9FA',
+                            cardBg: '#FFFFFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        arabic: ['Alexandria', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .font-ar { font-family: 'Alexandria', sans-serif; }
+        .font-fr { font-family: 'Plus Jakarta Sans', sans-serif; }
+        
+        /* Smooth Slide Animations for Hero Slider without arrows */
+        .slide-fade {
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        .slide-hidden {
+            opacity: 0;
+            transform: scale(1.03);
+            pointer-events: none;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+        .slide-active {
+            opacity: 1;
+            transform: scale(1);
+            position: relative;
+        }
+
+        /* Indicator Progress Bar */
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+        .progress-active {
+            animation: progress 5s linear infinite;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-saada-lightBg text-slate-800 font-fr antialiased selection:bg-saada-teal selection:text-white">
+
+    <!-- Top Emergency & Contact Bar -->
+    <div class="bg-saada-deepBlue text-white text-xs sm:text-sm py-2 px-4 shadow-inner">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center gap-4 flex-wrap">
+                <a href="tel:0537367777" class="flex items-center gap-1.5 hover:text-saada-cyan transition">
+                    <i class="fa-solid fa-phone text-saada-cyan"></i>
+                    <span id="topPhone1">05 37 36 77 77</span>
+                </a>
+                <span class="text-slate-500 hidden sm:inline">|</span>
+                <a href="https://wa.me/212641454546" target="_blank" class="flex items-center gap-1.5 hover:text-green-400 transition">
+                    <i class="fa-brands fa-whatsapp text-green-400 text-base"></i>
+                    <span id="topWhatsapp">06 41 45 45 46</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-4 text-xs">
+                <span class="hidden lg:flex items-center gap-1.5 text-slate-300">
+                    <i class="fa-regular fa-clock text-saada-cyan"></i>
+                    <span data-lang="schedule_top">Lun - Ven: 07:30 - 19:00 | Sam: 07:30 - 13:00</span>
+                </span>
+                <!-- Language Toggle Button -->
+                <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-saada-teal/20 hover:bg-saada-teal border border-saada-teal/40 text-white px-3 py-1 rounded-full font-bold transition-all flex items-center gap-2 shadow-sm">
+                    <i class="fa-solid fa-globe text-saada-cyan"></i>
+                    <span id="langBtnText">العربية</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div id="navLogoContainer" class="relative w-12 h-12 flex items-center justify-center">
+                        <svg viewBox="0 0 200 200" class="w-full h-full transform group-hover:scale-105 transition duration-300">
+                            <path d="M 40 160 Q 100 200 160 160 Q 100 135 40 160 Z" fill="none" stroke="#00A896" stroke-width="8" stroke-linecap="round"/>
+                            <rect x="55" y="158" width="90" height="8" rx="4" fill="#0047AB"/>
+                            <path d="M 140 40 L 95 115" stroke="#00A896" stroke-width="14" stroke-linecap="round"/>
+                            <rect x="130" y="25" width="22" height="18" rx="3" transform="rotate(-30 141 34)" fill="#0047AB"/>
+                            <circle cx="150" cy="30" fill="#0047AB" r="7"/>
+                            <path d="M 90 120 C 110 90, 150 110, 160 80 C 165 65, 155 50, 140 55" fill="none" stroke="#0047AB" stroke-width="6" stroke-linecap="round"/>
+                            <line x1="108" y1="108" x2="118" y2="120" stroke="#0047AB" stroke-width="4"/>
+                            <line x1="125" y1="92" x2="137" y2="103" stroke="#0047AB" stroke-width="4"/>
+                            <line x1="142" y1="78" x2="152" y2="88" stroke="#0047AB" stroke-width="4"/>
+                            <circle cx="160" cy="80" r="5" fill="#00A896"/>
+                            <path d="M 65 80 C 65 65, 78 50, 78 50 C 78 50, 91 65, 91 80 C 91 90, 85 98, 78 98 C 71 98, 65 90, 65 80 Z" fill="#E63946"/>
+                            <circle cx="100" cy="115" r="5" fill="#E63946"/>
+                            <circle cx="78" cy="120" r="6" fill="#0047AB"/>
+                            <circle cx="65" cy="130" r="4" fill="#0047AB"/>
+                            <line x1="78" y1="120" x2="65" y2="130" stroke="#0047AB" stroke-width="3"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xs font-semibold tracking-widest text-saada-blue uppercase" data-lang="brand_sub">LABORATOIRE</span>
+                        <span class="text-2xl font-extrabold tracking-tight text-saada-red -mt-1 font-fr" data-lang="brand_main">SAADA</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav Navigation -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700">
+                    <a href="#accueil" class="hover:text-saada-teal transition py-2 text-saada-blue font-semibold" data-lang="nav_home">Accueil</a>
+                    <a href="#apropos" class="hover:text-saada-teal transition py-2" data-lang="nav_about">À Propos</a>
+                    <a href="#services" class="hover:text-saada-teal transition py-2" data-lang="nav_services">Nos Analyses</a>
+                    <a href="#resultats" class="hover:text-saada-teal transition py-2" data-lang="nav_results">Résultats en Ligne</a>
+                    <a href="#contact" class="hover:text-saada-teal transition py-2" data-lang="nav_contact">Contact</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden lg:flex items-center gap-3">
+                    <a href="#rdv" class="bg-saada-red hover:bg-saada-redHover text-white px-5 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-0.5">
+                        <i class="fa-regular fa-calendar-check text-lg"></i>
+                        <span data-lang="btn_rdv">Rendez-vous / Prélèvement</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-saada-teal p-2 focus:outline-none">
+                    <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 pt-3 pb-6 shadow-xl flex-col space-y-3">
+            <a href="#accueil" onclick="toggleMobileMenu()" class="block py-2 text-saada-blue font-semibold border-b border-slate-100" data-lang="nav_home">Accueil</a>
+            <a href="#apropos" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 border-b border-slate-100" data-lang="nav_about">À Propos</a>
+            <a href="#services" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 border-b border-slate-100" data-lang="nav_services">Nos Analyses</a>
+            <a href="#resultats" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 border-b border-slate-100" data-lang="nav_results">Résultats en Ligne</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 border-b border-slate-100" data-lang="nav_contact">Contact</a>
+            <a href="#rdv" onclick="toggleMobileMenu()" class="mt-2 w-full bg-saada-red text-white py-3 rounded-xl font-semibold text-center block shadow-md" data-lang="btn_rdv">Rendez-vous / Prélèvement</a>
+        </div>
+    </header>
+
+    <!-- Hero Slider Section (NO ARROWS) -->
+    <section id="accueil" class="relative bg-slate-900 text-white overflow-hidden min-h-[550px] lg:min-h-[620px] flex items-center">
+        
+        <!-- Slide 1 -->
+        <div class="slide-fade slide-active flex items-center w-full min-h-[550px] lg:min-h-[620px]" id="slide-0">
+            <div class="absolute inset-0 bg-gradient-to-r from-saada-deepBlue/90 via-saada-blue/80 to-transparent z-10"></div>
+            <img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=1920&q=80" alt="Laboratoire d'analyses médicales moderne" class="absolute inset-0 w-full h-full object-cover">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-16">
+                <div class="max-w-2xl space-y-6">
+                    <span class="inline-flex items-center gap-2 bg-saada-teal/30 border border-saada-teal/50 text-saada-cyan px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-md">
+                        <i class="fa-solid fa-microscope"></i> <span data-lang="slide1_tag">Technologie de Pointe</span>
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold leading-tight tracking-tight text-white" data-lang="slide1_title">
+                        Précision, Rapidité & Exigence Médicale à Kénitra
+                    </h1>
+                    <p class="text-lg text-slate-200 leading-relaxed" data-lang="slide1_desc">
+                        Le Laboratoire SAADA met à votre disposition des équipements biologiques de dernière génération pour des analyses fiables et rapides.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <a href="#rdv" class="bg-saada-red hover:bg-saada-redHover text-white px-7 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all transform hover:scale-105" data-lang="hero_btn_1">
+                            Prendre Rendez-vous
+                        </a>
+                        <a href="#services" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-7 py-3.5 rounded-xl font-bold text-base backdrop-blur-md transition-all" data-lang="hero_btn_2">
+                            Nos Services
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide-fade slide-hidden flex items-center w-full min-h-[550px] lg:min-h-[620px]" id="slide-1">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-900/90 via-saada-teal/80 to-transparent z-10"></div>
+            <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=1920&q=80" alt="Équipe médicale spécialiste" class="absolute inset-0 w-full h-full object-cover">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-16">
+                <div class="max-w-2xl space-y-6">
+                    <span class="inline-flex items-center gap-2 bg-saada-red/30 border border-saada-red/50 text-red-200 px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-md">
+                        <i class="fa-solid fa-user-doctor"></i> <span data-lang="slide2_tag">Direction Médicale Qualifiée</span>
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold leading-tight tracking-tight text-white" data-lang="slide2_title">
+                        Sous la Direction de Dr. Nesrine ATCHICH
+                    </h1>
+                    <p class="text-lg text-slate-200 leading-relaxed" data-lang="slide2_desc">
+                        Spécialiste en analyses médicales dédiée à votre santé avec une équipe de biologistes expérimentés et attentionnés.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <a href="#apropos" class="bg-saada-teal hover:bg-teal-600 text-white px-7 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all transform hover:scale-105" data-lang="hero_btn_about">
+                            En Savoir Plus
+                        </a>
+                        <a href="tel:0537367777" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-7 py-3.5 rounded-xl font-bold text-base backdrop-blur-md transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-phone"></i> <span id="heroPhone">05 37 36 77 77</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide-fade slide-hidden flex items-center w-full min-h-[550px] lg:min-h-[620px]" id="slide-2">
+            <div class="absolute inset-0 bg-gradient-to-r from-saada-deepBlue/95 via-indigo-900/80 to-transparent z-10"></div>
+            <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=1920&q=80" alt="Service de prélèvement à domicile" class="absolute inset-0 w-full h-full object-cover">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full py-16">
+                <div class="max-w-2xl space-y-6">
+                    <span class="inline-flex items-center gap-2 bg-amber-500/30 border border-amber-400/50 text-amber-200 px-4 py-1.5 rounded-full text-sm font-semibold backdrop-blur-md">
+                        <i class="fa-solid fa-house-medical"></i> <span data-lang="slide3_tag">Confort & Proximité</span>
+                    </span>
+                    <h1 class="text-3xl sm:text-5xl font-extrabold leading-tight tracking-tight text-white" data-lang="slide3_title">
+                        Prélèvement à Domicile sur Simple Appel
+                    </h1>
+                    <p class="text-lg text-slate-200 leading-relaxed" data-lang="slide3_desc">
+                        Nous nous déplaçons chez vous à Kénitra et ses environs pour effectuer vos prélèvements en toute sécurité et sérénité.
+                    </p>
+                    <div class="pt-4 flex flex-wrap gap-4">
+                        <a href="https://wa.me/212641454546" target="_blank" class="bg-green-600 hover:bg-green-700 text-white px-7 py-3.5 rounded-xl font-bold text-base shadow-lg transition-all transform hover:scale-105 flex items-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-xl"></i> <span data-lang="hero_btn_whatsapp">Commander par WhatsApp</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slider Bottom Indicators (No Arrows) -->
+        <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex items-center gap-3">
+            <button onclick="setSlide(0)" id="dot-0" class="w-12 h-2 rounded-full bg-white transition-all duration-300 opacity-100 overflow-hidden relative">
+                <div class="h-full bg-saada-red progress-bar"></div>
+            </button>
+            <button onclick="setSlide(1)" id="dot-1" class="w-12 h-2 rounded-full bg-white/40 transition-all duration-300 hover:bg-white/70 overflow-hidden relative">
+                <div class="h-full bg-saada-red progress-bar"></div>
+            </button>
+            <button onclick="setSlide(2)" id="dot-2" class="w-12 h-2 rounded-full bg-white/40 transition-all duration-300 hover:bg-white/70 overflow-hidden relative">
+                <div class="h-full bg-saada-red progress-bar"></div>
+            </button>
+        </div>
+    </section>
+
+    <!-- Feature Quick Cards -->
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-30">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-2xl shadow-xl flex items-start gap-4 border-l-4 border-saada-teal hover:shadow-2xl transition">
+                <div class="w-14 h-14 rounded-2xl bg-saada-teal/10 text-saada-teal flex items-center justify-center text-2xl flex-shrink-0">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-saada-deepBlue" data-lang="feat1_title">Résultats Rapides</h3>
+                    <p class="text-sm text-slate-600 mt-1" data-lang="feat1_desc">Délivrance rapide de vos bilans avec notification SMS dès disponibilité.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl shadow-xl flex items-start gap-4 border-l-4 border-saada-blue hover:shadow-2xl transition">
+                <div class="w-14 h-14 rounded-2xl bg-saada-blue/10 text-saada-blue flex items-center justify-center text-2xl flex-shrink-0">
+                    <i class="fa-solid fa-house-medical"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-saada-deepBlue" data-lang="feat2_title">Prélèvement à Domicile</h3>
+                    <p class="text-sm text-slate-600 mt-1" data-lang="feat2_desc">Service dédié pour les personnes âgées, à mobilité réduite ou très occupées.</p>
+                </div>
+            </div>
+
+            <div class="glass-card p-6 rounded-2xl shadow-xl flex items-start gap-4 border-l-4 border-saada-red hover:shadow-2xl transition">
+                <div class="w-14 h-14 rounded-2xl bg-saada-red/10 text-saada-red flex items-center justify-center text-2xl flex-shrink-0">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg text-saada-deepBlue" data-lang="feat3_title">Normes de Qualité</h3>
+                    <p class="text-sm text-slate-600 mt-1" data-lang="feat3_desc">Contrôles de qualité stricts assurant une précision d'analyse maximale.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="apropos" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div class="relative">
+                <div class="absolute -top-4 -left-4 w-72 h-72 bg-saada-teal/20 rounded-full blur-3xl -z-10"></div>
+                <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                    <img id="doctorImg" src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&w=1000&q=80" alt="Laboratoire SAADA Dr Nesrine Atchich" class="w-full h-[450px] object-cover">
+                    <div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-saada-deepBlue via-saada-deepBlue/80 to-transparent p-6 text-white">
+                        <span class="text-xs uppercase tracking-wider text-saada-cyan font-bold" data-lang="about_badge">Direction du laboratoire</span>
+                        <h3 class="text-2xl font-bold" id="doctorNameDisplay">Dr. Nesrine ATCHICH</h3>
+                        <p class="text-slate-200 text-sm font-medium" data-lang="doc_title">Spécialiste en Analyses Médicales</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <div class="inline-flex items-center gap-2 text-saada-teal font-bold uppercase tracking-wider text-xs bg-saada-teal/10 px-3 py-1 rounded-md">
+                    <i class="fa-solid fa-circle-info"></i> <span data-lang="about_section_tag">À Propos de Nous</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-saada-deepBlue leading-tight" data-lang="about_heading">
+                    Votre Partenaire de Confiance pour votre Santé à Kénitra
+                </h2>
+                <p class="text-slate-600 leading-relaxed" data-lang="about_p1">
+                    Le **Laboratoire d'Analyses Médicales SAADA** s'engage à offrir aux patients et aux médecins prescripteurs des prestations de biologie médicale répondant aux normes internationales les plus exigeantes.
+                </p>
+                <p class="text-slate-600 leading-relaxed" data-lang="about_p2">
+                    Situé en plein centre-ville de Kénitra (Immeuble Center Plaza), notre laboratoire associe accueil chaleureux, compétences médicales pointues et équipements de haute technologie pour garantir un diagnostic précis dans les meilleurs délais.
+                </p>
+
+                <div class="grid grid-cols-2 gap-4 pt-2">
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center gap-3">
+                        <i class="fa-solid fa-check-double text-saada-teal text-xl"></i>
+                        <span class="font-semibold text-slate-700 text-sm" data-lang="about_point1">Matériel de pointe</span>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center gap-3">
+                        <i class="fa-solid fa-check-double text-saada-teal text-xl"></i>
+                        <span class="font-semibold text-slate-700 text-sm" data-lang="about_point2">Confidentialité totale</span>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center gap-3">
+                        <i class="fa-solid fa-check-double text-saada-teal text-xl"></i>
+                        <span class="font-semibold text-slate-700 text-sm" data-lang="about_point3">Équipe qualifiée</span>
+                    </div>
+                    <div class="p-4 bg-white rounded-xl shadow-sm border border-slate-100 flex items-center gap-3">
+                        <i class="fa-solid fa-check-double text-saada-teal text-xl"></i>
+                        <span class="font-semibold text-slate-700 text-sm" data-lang="about_point4">Hygiène rigoureuse</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-slate-100/70 border-y border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+                <span class="text-saada-teal font-bold uppercase tracking-wider text-xs bg-saada-teal/10 px-3 py-1 rounded-md" data-lang="services_tag">Nos Domaines d'Expertise</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-saada-deepBlue" data-lang="services_title">Examens & Analyses Médicales</h2>
+                <p class="text-slate-600" data-lang="services_subtitle">Un large éventail de prestations biologiques réalisées avec rigueur et précision.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-saada-blue/10 text-saada-blue rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-saada-blue group-hover:text-white transition duration-300">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-saada-deepBlue mb-3" data-lang="s1_title">Hématologie & Immuno-hématologie</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-lang="s1_desc">NFS, Numération formule sanguine, Groupe sanguin, Bilan de coagulation (TP, TCA) et étude des cellules sanguines.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-saada-teal/10 text-saada-teal rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-saada-teal group-hover:text-white transition duration-300">
+                        <i class="fa-solid fa-flask"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-saada-deepBlue mb-3" data-lang="s2_title">Biochimie Clinique</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-lang="s2_desc">Bilan rénal (Urée, Créatinine), Bilan lipidique (Cholestérol, Triglycérides), Glycémie, Bilan hépatique et ionogramme.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-saada-red/10 text-saada-red rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-saada-red group-hover:text-white transition duration-300">
+                        <i class="fa-solid fa-dna"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-saada-deepBlue mb-3" data-lang="s3_title">Hormonologie & Immunologie</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-lang="s3_desc">Dosages hormonaux (Thyroïde, Fertilité), Marqueurs tumoraux, Sérologies infectieuses et maladies auto-immunes.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-emerald-500/10 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition duration-300">
+                        <i class="fa-solid fa-bacteria"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-saada-deepBlue mb-3" data-lang="s4_title">Microbiologie & Parasitologie</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-lang="s4_desc">ECBU, Prélèvements bactériologiques, Antibiogramme, Examens parasitologiques des selles et mycologie.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-purple-500/10 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition duration-300">
+                        <i class="fa-solid fa-baby"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-saada-deepBlue mb-3" data-lang="s5_title">Bilan de Grossesse & Fertilité</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-lang="s5_desc">Suivi complet de la femme enceinte, Toxoplasmose, Rubéole, Dépistage du diabète gestationnel et bilan d'infertilité.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-amber-500/10 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition duration-300">
+                        <i class="fa-solid fa-vial-circle-check"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-saada-deepBlue mb-3" data-lang="s6_title">Bilans de Santé Préventifs</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed" data-lang="s6_desc">Check-up général personnalisé (Bilan Senior, Bilan Sportif, Bilan de fatigue, Dépistage MST).</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Online Results Portal Section -->
+    <section id="resultats" class="py-20 bg-gradient-to-br from-saada-deepBlue to-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#00A896_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="space-y-6">
+                    <span class="inline-flex items-center gap-2 bg-saada-teal/20 text-saada-cyan border border-saada-teal/30 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider" data-lang="portal_tag">
+                        <i class="fa-solid fa-laptop-medical"></i> Espaces Sécurisé
+                    </span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight" data-lang="portal_title">
+                        Consultez vos Résultats de Analyses en Ligne
+                    </h2>
+                    <p class="text-slate-300 leading-relaxed" data-lang="portal_desc">
+                        Gagnez du temps ! Accédez à vos compte-rendus d'analyses biomédicales de manière confidentielle et sécurisée 24h/24 et 7j/7 grâce à vos identifiants fournis lors du prélèvement.
+                    </p>
+                    <ul class="space-y-3 text-slate-200">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-saada-teal"></i>
+                            <span data-lang="p_feature1">Téléchargement au format PDF sécurisé</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-saada-teal"></i>
+                            <span data-lang="p_feature2">Historique de vos anciens bilans</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-saada-teal"></i>
+                            <span data-lang="p_feature3">Transmission directe à votre médecin traitant (sur demande)</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Portal Form Card -->
+                <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
+                    <h3 class="text-2xl font-bold mb-6 text-center text-white flex items-center justify-center gap-2" data-lang="portal_form_title">
+                        <i class="fa-solid fa-lock text-saada-teal"></i> Accès Patient
+                    </h3>
+                    
+                    <form onsubmit="handleResultsSubmit(event)" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-200 mb-1" data-lang="portal_id_label">N° de Dossier / Identifiant</label>
+                            <input type="text" required placeholder="Ex: LAB-2026-8890" class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-200 mb-1" data-lang="portal_pass_label">Mot de Passe / Code Confidentialité</label>
+                            <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 rounded-xl bg-white/20 border border-white/30 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                        </div>
+                        <button type="submit" class="w-full bg-saada-teal hover:bg-teal-500 text-white py-3.5 rounded-xl font-bold shadow-lg transition duration-300 mt-2 flex items-center justify-center gap-2" data-lang="portal_btn">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <span>Voir mes Résultats</span>
+                        </button>
+                    </form>
+                    
+                    <div id="resultsAlert" class="hidden mt-4 p-3 rounded-xl text-sm bg-amber-500/20 border border-amber-500/40 text-amber-200 text-center"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment / Home Sampling Section -->
+    <section id="rdv" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-5">
+                
+                <div class="lg:col-span-2 bg-gradient-to-br from-saada-blue to-saada-deepBlue p-8 sm:p-12 text-white flex flex-col justify-between">
+                    <div class="space-y-6">
+                        <span class="inline-block bg-saada-teal/30 border border-saada-teal/40 px-3 py-1 rounded-full text-xs font-bold text-saada-cyan uppercase" data-lang="rdv_side_tag">Demande Rapide</span>
+                        <h3 class="text-3xl font-extrabold" data-lang="rdv_side_title">Prise de RDV & Prélèvement à Domicile</h3>
+                        <p class="text-slate-200 text-sm leading-relaxed" data-lang="rdv_side_desc">
+                            Remplissez ce formulaire pour réserver votre passage au laboratoire ou demander la venue d'un(e) infirmier(ère) qualifié(e) à votre domicile.
+                        </p>
+                    </div>
+
+                    <div class="space-y-4 mt-8 pt-8 border-t border-white/20">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-brands fa-whatsapp text-green-400 text-2xl"></i>
+                            <div>
+                                <p class="text-xs text-slate-300" data-lang="rdv_quick_wa">Réservation directe par WhatsApp</p>
+                                <a href="https://wa.me/212641454546" target="_blank" class="font-bold text-white hover:text-green-400 transition" id="whatsappDisplay">06 41 45 45 46</a>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-saada-cyan text-xl"></i>
+                            <div>
+                                <p class="text-xs text-slate-300" data-lang="rdv_quick_phone">Standard Téléphonique</p>
+                                <p class="font-bold text-white" id="phoneDisplay">05 37 36 77 77 / 05 37 36 88 88</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="lg:col-span-3 p-8 sm:p-12">
+                    <form onsubmit="handleAppointmentSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2" data-lang="form_fullname">Nom et Prénom *</label>
+                                <input type="text" required placeholder="Ex: Mohamed Alami" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2" data-lang="form_phone">Téléphone *</label>
+                                <input type="tel" required placeholder="06XX XX XX XX" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2" data-lang="form_type">Lieu du Prélèvement *</label>
+                                <select class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal bg-white">
+                                    <option value="labo" data-lang="opt_labo">Au Laboratoire (Kénitra)</option>
+                                    <option value="domicile" data-lang="opt_domicile">À Domicile (Prélèvement à domicile)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-slate-700 mb-2" data-lang="form_date">Date souhaitée *</label>
+                                <input type="date" required class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2" data-lang="form_notes">Précisions ou Ordonnance (Optionnel)</label>
+                            <textarea rows="3" placeholder="Tapez vos remarques ou adresse exacte pour domicile..." class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full bg-saada-red hover:bg-saada-redHover text-white py-4 rounded-xl font-bold shadow-lg transition duration-300 text-base" data-lang="form_btn">
+                            Confirmer la demande de RDV
+                        </button>
+                    </form>
+
+                    <div id="rdvAlert" class="hidden mt-4 p-4 rounded-xl text-center text-sm font-medium bg-emerald-100 border border-emerald-300 text-emerald-800"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Map Section -->
+    <section id="contact" class="py-20 bg-slate-100/70 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto space-y-3 mb-16">
+                <span class="text-saada-teal font-bold uppercase tracking-wider text-xs bg-saada-teal/10 px-3 py-1 rounded-md" data-lang="contact_tag">Où nous trouver</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-saada-deepBlue" data-lang="contact_title">Contact & Localisation</h2>
+                <p class="text-slate-600" data-lang="contact_subtitle">Nous sommes situés au cœur de Kénitra pour mieux vous servir.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 space-y-6">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-saada-teal/10 text-saada-teal rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-saada-deepBlue" data-lang="c_addr_title">Adresse du Laboratoire</h4>
+                            <p class="text-slate-600 text-sm mt-1 leading-relaxed" id="addressDisplay">
+                                Angle Avenue Mohamed Diouri et Rue Omar El Mokhtar, Immeuble Center Plaza, 1er étage, Bureau N° 7, Kénitra.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-saada-blue/10 text-saada-blue rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-saada-deepBlue" data-lang="c_phone_title">Téléphones</h4>
+                            <p class="text-slate-600 text-sm mt-1" id="phone1Display">05 37 36 77 77</p>
+                            <p class="text-slate-600 text-sm" id="phone2Display">05 37 36 88 88</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-green-500/10 text-green-600 rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-saada-deepBlue">WhatsApp</h4>
+                            <a href="https://wa.me/212641454546" target="_blank" class="text-green-600 font-semibold text-sm hover:underline" id="whatsappLinkDisplay">06 41 45 45 46</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-saada-red/10 text-saada-red rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
+                            <i class="fa-regular fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-saada-deepBlue">E-mail</h4>
+                            <a href="mailto:Laboratoire.saada@gmail.com" class="text-slate-600 text-sm hover:text-saada-teal transition" id="emailDisplay">Laboratoire.saada@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden h-[400px] lg:h-auto min-h-[350px] relative">
+                    <iframe 
+                        title="Localisation Laboratoire SAADA"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3301.839818824147!2d-6.5825!3d34.2575!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDE1JzI3LjAiTiA2wrAzNCc1Ny4wIlc!5e0!3m2!1sfr!2sma!4v1650000000000!5m2!1sfr!2sma" 
+                        class="w-full h-full border-0" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1: Brand & Logo in Footer -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div id="footerLogoContainer" class="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center overflow-hidden">
+                            <i class="fa-solid fa-microscope text-saada-cyan text-xl"></i>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold tracking-widest text-saada-cyan block uppercase">LABORATOIRE</span>
+                            <span class="text-xl font-extrabold text-saada-red">SAADA</span>
+                        </div>
+                    </div>
+                    <p class="text-slate-400 text-sm leading-relaxed" data-lang="footer_desc">
+                        Laboratoire d'Analyses Médicales à Kénitra sous la direction de Dr. Nesrine ATCHICH. Biologie médicale de haute précision.
+                    </p>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-white" data-lang="f_links_title">Navigation</h4>
+                    <ul class="space-y-2.5 text-slate-400 text-sm">
+                        <li><a href="#accueil" class="hover:text-saada-teal transition" data-lang="nav_home">Accueil</a></li>
+                        <li><a href="#apropos" class="hover:text-saada-teal transition" data-lang="nav_about">À Propos</a></li>
+                        <li><a href="#services" class="hover:text-saada-teal transition" data-lang="nav_services">Nos Analyses</a></li>
+                        <li><a href="#resultats" class="hover:text-saada-teal transition" data-lang="nav_results">Résultats en Ligne</a></li>
+                        <li><a href="#rdv" class="hover:text-saada-teal transition" data-lang="btn_rdv">Prendre RDV</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Hours -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-white" data-lang="f_hours_title">Horaires d'Ouverture</h4>
+                    <ul class="space-y-2.5 text-slate-400 text-sm">
+                        <li class="flex justify-between">
+                            <span data-lang="f_days">Lundi - Vendredi:</span>
+                            <span class="text-white font-medium">07:30 - 19:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span data-lang="f_sat">Samedi:</span>
+                            <span class="text-white font-medium">07:30 - 13:00</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span data-lang="f_sun">Dimanche:</span>
+                            <span class="text-saada-red font-medium" data-lang="f_closed">Fermé</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact summary -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 text-white" data-lang="f_contact_title">Aide & Contact</h4>
+                    <p class="text-slate-400 text-sm mb-3" data-lang="f_help">Besoin d'aide ou d'un renseignement sur vos analyses ?</p>
+                    <a href="tel:0537367777" class="inline-flex items-center gap-2 bg-saada-blue hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-sm transition">
+                        <i class="fa-solid fa-phone"></i>
+                        <span>Appeler le Laboratoire</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Text Admin Link -->
+            <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 Laboratoire SAADA (مختبر السعادة). Tous droits réservés.</p>
+                <p id="footerCredit" data-lang="doc_credit">Sous la direction de Dr. Nesrine ATCHICH - Kénitra</p>
+                <!-- Text Admin Access Link -->
+                <div>
+                    <button onclick="openAdminModal()" class="text-slate-400 hover:text-saada-cyan transition underline">
+                        Administration / الإدارة
+                    </button>
+                </div>
+            </div>
+
+            <!-- Creator Credit Line -->
+            <div class="text-center pt-4 mt-4 border-t border-slate-800/60 text-xs text-slate-400">
+                By Proo Of Concept - Nezar ZAMZAM
+            </div>
+        </div>
+    </footer>
+
+    <!-- ADMIN MODAL / DASHBOARD DIALOG -->
+    <div id="adminModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
+            
+            <!-- Modal Header -->
+            <div class="bg-saada-deepBlue text-white p-6 flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-saada-teal/20 rounded-xl flex items-center justify-center text-saada-cyan">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg" data-lang="admin_panel_title">Panneau d'Administration / لوحة التحكم</h3>
+                        <p class="text-xs text-slate-300" data-lang="admin_panel_sub">Gestion et mise à jour du contenu du site</p>
+                    </div>
+                </div>
+                <button onclick="closeAdminModal()" class="text-slate-300 hover:text-white text-xl p-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Login View -->
+            <div id="adminLoginView" class="p-8 space-y-6">
+                <div class="text-center space-y-2">
+                    <h4 class="text-xl font-bold text-saada-deepBlue" data-lang="login_prompt">Connexion Requise</h4>
+                    <p class="text-sm text-slate-500" data-lang="login_desc">Veuillez entrer le nom d'utilisateur et le mot de passe administrateur.</p>
+                </div>
+                <div class="space-y-4 max-w-md mx-auto">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="user_label">Nom d'utilisateur</label>
+                        <input type="text" id="adminUser" placeholder="Ex: admin" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="pass_label">Mot de passe</label>
+                        <input type="password" id="adminPass" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                    </div>
+                    <div id="loginError" class="hidden text-xs text-red-600 text-center font-medium"></div>
+                    <button onclick="checkAdminLogin()" class="w-full bg-saada-blue hover:bg-saada-deepBlue text-white py-3.5 rounded-xl font-bold transition shadow-md" data-lang="login_btn">
+                        Se connecter
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dashboard Editor View (Hidden initially) -->
+            <div id="adminDashboardView" class="p-8 space-y-6 hidden max-h-[75vh] overflow-y-auto">
+                <div class="flex justify-between items-center border-b border-slate-200 pb-4">
+                    <h4 class="font-bold text-lg text-saada-deepBlue" data-lang="edit_section_title">Modification des Informations</h4>
+                    <button onclick="logoutAdmin()" class="text-xs text-red-600 hover:underline font-semibold" data-lang="logout_btn">Déconnexion</button>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_doc_name">Nom de la Médecin / Dr.</label>
+                        <input type="text" id="editDocName" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_doc_img">Lien de la photo de la Médecin (URL)</label>
+                        <input type="url" id="editDocImg" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_logo_url">Lien du Logo (URL ou Image)</label>
+                        <input type="url" id="editLogoUrl" placeholder="Laissez vide pour garder le logo vectoriel par défaut" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_phone1">Téléphone Principal</label>
+                            <input type="text" id="editPhone1" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_phone2">Téléphone Secondaire</label>
+                            <input type="text" id="editPhone2" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_whatsapp">WhatsApp</label>
+                            <input type="text" id="editWhatsapp" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_email">E-mail</label>
+                            <input type="email" id="editEmail" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_address">Adresse du Laboratoire</label>
+                        <textarea id="editAddress" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal"></textarea>
+                    </div>
+
+                    <button onclick="saveAdminChanges()" class="w-full bg-saada-teal hover:bg-teal-600 text-white py-3.5 rounded-xl font-bold shadow-lg transition" data-lang="save_btn">
+                        Enregistrer les modifications
+                    </button>
+                    <div id="saveSuccessAlert" class="hidden text-center text-xs text-emerald-600 font-bold"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Dictionary for Language Switching
+        const translations = {
+            fr: {
+                brand_sub: "LABORATOIRE",
+                brand_main: "SAADA",
+                nav_home: "Accueil",
+                nav_about: "À Propos",
+                nav_services: "Nos Analyses",
+                nav_results: "Résultats en Ligne",
+                nav_contact: "Contact",
+                btn_rdv: "Rendez-vous / Prélèvement",
+                schedule_top: "Lun - Ven: 07:30 - 19:00 | Sam: 07:30 - 13:00",
+                
+                slide1_tag: "Technologie de Pointe",
+                slide1_title: "Précision, Rapidité & Exigence Médicale à Kénitra",
+                slide1_desc: "Le Laboratoire SAADA met à votre disposition des équipements biologiques de dernière génération pour des analyses fiables et rapides.",
+                hero_btn_1: "Prendre Rendez-vous",
+                hero_btn_2: "Nos Services",
+                
+                slide2_tag: "Direction Médicale Qualifiée",
+                slide2_title: "Sous la Direction de Dr. Nesrine ATCHICH",
+                slide2_desc: "Spécialiste en analyses médicales dédiée à votre santé avec une équipe de biologistes expérimentés et attentionnés.",
+                hero_btn_about: "En Savoir Plus",
+                
+                slide3_tag: "Confort & Proximité",
+                slide3_title: "Prélèvement à Domicile sur Simple Appel",
+                slide3_desc: "Nous nous déplaçons chez vous à Kénitra et ses environs pour effectuer vos prélèvements en toute sécurité et sérénité.",
+                hero_btn_whatsapp: "Commander par WhatsApp",
+
+                feat1_title: "Résultats Rapides",
+                feat1_desc: "Délivrance rapide de vos bilans avec notification SMS dès disponibilité.",
+                feat2_title: "Prélèvement à Domicile",
+                feat2_desc: "Service dédié pour les personnes âgées, à mobilité réduite ou très occupées.",
+                feat3_title: "Normes de Qualité",
+                feat3_desc: "Contrôles de qualité stricts assurant une précision d'analyse maximale.",
+
+                about_badge: "Direction du laboratoire",
+                doc_title: "Spécialiste en Analyses Médicales",
+                about_section_tag: "À Propos de Nous",
+                about_heading: "Votre Partenaire de Confiance pour votre Santé à Kénitra",
+                about_p1: "Le Laboratoire d'Analyses Médicales SAADA s'engage à offrir aux patients et aux médecins prescripteurs des prestations de biologie médicale répondant aux normes internationales les plus exigeantes.",
+                about_p2: "Situé en plein centre-ville de Kénitra (Immeuble Center Plaza), notre laboratoire associe accueil chaleureux, compétences médicales pointues et équipements de haute technologie pour garantir un diagnostic précis dans les meilleurs délais.",
+                about_point1: "Matériel de pointe",
+                about_point2: "Confidentialité totale",
+                about_point3: "Équipe qualifiée",
+                about_point4: "Hygiène rigoureuse",
+
+                services_tag: "Nos Domaines d'Expertise",
+                services_title: "Examens & Analyses Médicales",
+                services_subtitle: "Un large éventail de prestations biologiques réalisées avec rigueur et précision.",
+                s1_title: "Hématologie & Immuno-hématologie",
+                s1_desc: "NFS, Numération formule sanguine, Groupe sanguin, Bilan de coagulation (TP, TCA) et étude des cellules sanguines.",
+                s2_title: "Biochimie Clinique",
+                s2_desc: "Bilan rénal (Urée, Créatinine), Bilan lipidique (Cholestérol, Triglycérides), Glycémie, Bilan hépatique et ionogramme.",
+                s3_title: "Hormonologie & Immunologie",
+                s3_desc: "Dosages hormonaux (Thyroïde, Fertilité), Marqueurs tumoraux, Sérologies infectieuses et maladies auto-immunes.",
+                s4_title: "Microbiologie & Parasitologie",
+                s4_desc: "ECBU, Prélèvements bactériologiques, Antibiogramme, Examens parasitologiques des selles et mycologie.",
+                s5_title: "Bilan de Grossesse & Fertilité",
+                s5_desc: "Suivi complet de la femme enceinte, Toxoplasmose, Rubéole, Dépistage du diabète gestationnel et bilan d'infertilité.",
+                s6_title: "Bilans de Santé Préventifs",
+                s6_desc: "Check-up général personnalisé (Bilan Senior, Bilan Sportif, Bilan de fatigue, Dépistage MST).",
+
+                portal_tag: "Espace Sécurisé",
+                portal_title: "Consultez vos Résultats d'Analyses en Ligne",
+                portal_desc: "Gagnez du temps ! Accédez à vos compte-rendus d'analyses biomédicales de manière confidentielle et sécurisée 24h/24 et 7j/7 grâce à vos identifiants fournis lors du prélèvement.",
+                p_feature1: "Téléchargement au format PDF sécurisé",
+                p_feature2: "Historique de vos anciens bilans",
+                p_feature3: "Transmission directe à votre médecin traitant (sur demande)",
+                portal_form_title: "Accès Patient",
+                portal_id_label: "N° de Dossier / Identifiant",
+                portal_pass_label: "Mot de Passe / Code Confidentialité",
+                portal_btn: "Voir mes Résultats",
+
+                rdv_side_tag: "Demande Rapide",
+                rdv_side_title: "Prise de RDV & Prélèvement à Domicile",
+                rdv_side_desc: "Remplissez ce formulaire pour réserver votre passage au laboratoire ou demander la venue d'un(e) infirmier(ère) qualifié(e) à votre domicile.",
+                rdv_quick_wa: "Réservation directe par WhatsApp",
+                rdv_quick_phone: "Standard Téléphonique",
+                form_fullname: "Nom et Prénom *",
+                form_phone: "Téléphone *",
+                form_type: "Lieu du Prélèvement *",
+                opt_labo: "Au Laboratoire (Kénitra)",
+                opt_domicile: "À Domicile (Prélèvement à domicile)",
+                form_date: "Date souhaitée *",
+                form_notes: "Précisions ou Ordonnance (Optionnel)",
+                form_btn: "Confirmer la demande de RDV",
+
+                contact_tag: "Où nous trouver",
+                contact_title: "Contact & Localisation",
+                contact_subtitle: "Nous sommes situés au cœur de Kénitra pour mieux vous servir.",
+                c_addr_title: "Adresse du Laboratoire",
+                c_phone_title: "Téléphones",
+
+                footer_desc: "Laboratoire d'Analyses Médicales à Kénitra sous la direction de Dr. Nesrine ATCHICH. Biologie médicale de haute précision.",
+                f_links_title: "Navigation",
+                f_hours_title: "Horaires d'Ouverture",
+                f_days: "Lundi - Vendredi:",
+                f_sat: "Samedi:",
+                f_sun: "Dimanche:",
+                f_closed: "Fermé",
+                f_contact_title: "Aide & Contact",
+                f_help: "Besoin d'aide ou d'un renseignement sur vos analyses ?",
+                doc_credit: "Sous la direction de Dr. Nesrine ATCHICH - Kénitra",
+                
+                admin_panel_title: "Panneau d'Administration / لوحة التحكم",
+                admin_panel_sub: "Gestion et mise à jour du contenu du site",
+                login_prompt: "Connexion Requise",
+                login_desc: "Veuillez entrer le nom d'utilisateur et le mot de passe administrateur.",
+                user_label: "Nom d'utilisateur",
+                pass_label: "Mot de passe",
+                login_btn: "Se connecter",
+                edit_section_title: "Modification des Informations",
+                logout_btn: "Déconnexion",
+                edit_doc_name: "Nom de la Médecin / Dr.",
+                edit_doc_img: "Lien de la photo de la Médecin (URL)",
+                edit_logo_url: "Lien du Logo (URL ou Image)",
+                edit_phone1: "Téléphone Principal",
+                edit_phone2: "Téléphone Secondaire",
+                edit_whatsapp: "WhatsApp",
+                edit_email: "E-mail",
+                edit_address: "Adresse du Laboratoire",
+                save_btn: "Enregistrer les modifications"
+            },
+            ar: {
+                brand_sub: "مختبر",
+                brand_main: "السعادة",
+                nav_home: "الرئيسية",
+                nav_about: "من نحن",
+                nav_services: "التحاليل الطبية",
+                nav_results: "النتائج عبر الإنترنت",
+                nav_contact: "اتصل بنا",
+                btn_rdv: "حجز موعد / أخذ العينات",
+                schedule_top: "الإثنين - الجمعة: 07:30 - 19:00 | السبت: 07:30 - 13:00",
+                
+                slide1_tag: "تكنولوجيا حديثة متطورة",
+                slide1_title: "الدقة، السرعة والجودة الطبية العالية بالقنيطرة",
+                slide1_desc: "يضع مختبر السعادة بين أيديكم أحدث التجهيزات البيولوجية لإجراء تحاليل موثوقة وسريعة.",
+                hero_btn_1: "حجز موعد",
+                hero_btn_2: "خدماتنا",
+                
+                slide2_tag: "إدارة طبية متخصصة",
+                slide2_title: "تحت إشراف الدكتورة نسرين اتطيش",
+                slide2_desc: "أخصائية في التحاليل الطبية مكرسة لصحتكم مع طاقم من البيولوجيين ذوي الخبرة والعناية الفائقة.",
+                hero_btn_about: "إعرف المزيد",
+                
+                slide3_tag: "راحة وقرب من المواطن",
+                slide3_title: "أخذ العينات بالمنزل بمجرد اتصال",
+                slide3_desc: "نتنقل إلى منازلكم بالقنيطرة والنواحي لأخذ العينات بكل أمان وراحة بال.",
+                hero_btn_whatsapp: "الطلب عبر واتساب",
+
+                feat1_title: "نتائج سريعة",
+                feat1_desc: "تسليم سريع لنتائج التحاليل مع إشعار عبر الرسائل القصيرة فور تجهيزها.",
+                feat2_title: "أخذ العينات بالمنزل",
+                feat2_desc: "خدمة مخصصة لكبار السن، ذوي الحركة المحدودة أو الأشخاص المزيودين بالعمل.",
+                feat3_title: "معايير الجودة",
+                feat3_desc: "رقابة صارمة على الجودة لضمان أقصى درجات الدقة في التحاليل.",
+
+                about_badge: "إدارة المختبر",
+                doc_title: "أخصائية في التحاليل الطبية",
+                about_section_tag: "نبذة عنا",
+                about_heading: "شريككم الموثوق لصحتكم بمدينة القنيطرة",
+                about_p1: "يلتزم مختبر التحاليل الطبية السعادة بتقديم خدمات بيولوجيا طبية للمرضى والأطباء وفق أعلى المعايير الدولية المعمول بها.",
+                about_p2: "يقع المختبر في قلب مدينة القنيطرة (عمارة سانتر بلازا)، ويجمع بين الاستقبال الدافئ، الكفاءة الطبية العالية والتجهيزات الحديثة لضمان تشخيص دقيق في أسرع وقت.",
+                about_point1: "معدات متطورة",
+                about_point2: "سرية تامة",
+                about_point3: "طاقم مؤهل",
+                about_point4: "نظافة وتعقيم صارم",
+
+                services_tag: "مجالات اختصاصنا",
+                services_title: "الفحوصات والتحاليل الطبية",
+                services_subtitle: "مجموعة واسعة من الفحوصات البيولوجية المنفذة بدقة وعناية فائقة.",
+                s1_title: "أمراض الدم وزمرة الدم",
+                s1_desc: "تعداد الكريات الدموية (NFS)، زمرة الدم، تخثر الدم وفحص خلايا الدم.",
+                s2_title: "الكيمياء الحيوية السريرية",
+                s2_desc: "وظائف الكلى (الكرياتينين، اليوريا)، كوليسترول والدهنيات، السكري، ووظائف الكبد.",
+                s3_title: "الهرمونات والمناعة",
+                s3_desc: "تحاليل الغدة الدرقية، هرمونات الخصوبة، مؤشرات الأورام، والسيرولوجيا والمناعة الذاتية.",
+                s4_title: "علم الجراثيم الطفيليات",
+                s4_desc: "فحص البول والجرثوميات (ECBU)، اختبار الحساسية للمضادات الحيوية وفحص الطفيليات.",
+                s5_title: "فحوصات الحمل والخصوبة",
+                s5_desc: "متابعة شاملة للحامل، داء القطط (Toxoplasmose)، الحصبة الألمانية، وسكري الحمل.",
+                s6_title: "الفحوصات الشاملة والوقائية",
+                s6_desc: "فحص شامل مخصص (كبار السن، الرياضيين، الإرهاق الدائم، والفحوصات المبكرة).",
+
+                portal_tag: "فضاء آمن",
+                portal_title: "اطّلع على نتائج تحاليلك عبر الإنترنت",
+                portal_desc: "وفر وقتك! يمكنك الوصول إلى نتائج تحاليلك الطبية بكل سرية وأمان على مدار 24 ساعة وطيلة أيام الأسبوع باستخدام رمزك الخاص.",
+                p_feature1: "تحميل النتائج بصيغة PDF آمنة",
+                p_feature2: "سجل تحاليلك السابقة",
+                p_feature3: "إرسال مباشر لطبيبك المعالج (حسب الطلب)",
+                portal_form_title: "دخول المريض",
+                portal_id_label: "رقم الملف / المعرف",
+                portal_pass_label: "كلمة المرور / رمز السرية",
+                portal_btn: "عرض النتائج",
+
+                rdv_side_tag: "طلب سريع",
+                rdv_side_title: "حجز موعد وأخذ العينات في المنزل",
+                rdv_side_desc: "قم بملء هذه الاستمارة لحجز زيارتك للمختبر أو طلب تنقل ممرض(ة) مؤهل(ة) إلى منزلك.",
+                rdv_quick_wa: "حجز مباشر عبر الواتساب",
+                rdv_quick_phone: "الهاتف الثابت",
+                form_fullname: "الاسم الكامل *",
+                form_phone: "رقم الهاتف *",
+                form_type: "مكان أخذ العينة *",
+                opt_labo: "في المختبر (القنيطرة)",
+                opt_domicile: "في المنزل (تنقل الممرض للمنزل)",
+                form_date: "التاريخ المطلوب *",
+                form_notes: "ملاحظات أو الوصفة الطبية (اختياري)",
+                form_btn: "تأكيد طلب الموعد",
+
+                contact_tag: "موقعنا",
+                contact_title: "الاتصال والموقع",
+                contact_subtitle: "تواجدنا بموقع استراتيجي وسط مدينة القنيطرة لخدمتكم بشكل أفضل.",
+                c_addr_title: "عنوان المختبر",
+                c_phone_title: "أرقام الهاتف",
+
+                footer_desc: "مختبر التحاليل الطبية بالقنيطرة تحت إشراف الدكتورة نسرين اتطيش. بيولوجيا طبية عالية الدقة.",
+                f_links_title: "روابط سريعة",
+                f_hours_title: "أوقات العمل",
+                f_days: "الإثنين - الجمعة:",
+                f_sat: "السبت:",
+                f_sun: "الأحد:",
+                f_closed: "مغلق",
+                f_contact_title: "المساعدة والاتصال",
+                f_help: "هل تحتاج لمساعدة أو استفسار بخصوص تحاليلك؟",
+                doc_credit: "تحت إشراف الدكتورة نسرين اتطيش - القنيطرة",
+                
+                admin_panel_title: "لوحة التحكم / Panneau d'Administration",
+                admin_panel_sub: "إدارة وتعديل محتوى الموقع",
+                login_prompt: "تسجيل الدخول مطلوب",
+                login_desc: "المرجو إدخال اسم المستخدم وكلمة المرور الخاصة بالإدارة.",
+                user_label: "اسم المستخدم (Username)",
+                pass_label: "كلمة المرور (Password)",
+                login_btn: "دخول",
+                edit_section_title: "تعديل معلومات الموقع",
+                logout_btn: "تسجيل الخروج",
+                edit_doc_name: "اسم الدكتورة",
+                edit_doc_img: "رابط صورة الدكتورة (URL)",
+                edit_logo_url: "رابط صورة اللوغو في الأسفل (URL)",
+                edit_phone1: "رقم الهاتف الأول",
+                edit_phone2: "رقم الهاتف الثاني",
+                edit_whatsapp: "رقم الواتساب",
+                edit_email: "البريد الإلكتروني",
+                edit_address: "عنوان المختبر",
+                save_btn: "حفظ التغييرات"
+            }
+        };
+
+        let currentLang = 'fr';
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'fr' ? 'ar' : 'fr';
+            const html = document.documentElement;
+            
+            if (currentLang === 'ar') {
+                html.setAttribute('dir', 'rtl');
+                html.setAttribute('lang', 'ar');
+                document.body.classList.remove('font-fr');
+                document.body.classList.add('font-ar');
+                document.getElementById('langBtnText').innerText = 'Français';
+            } else {
+                html.setAttribute('dir', 'ltr');
+                html.setAttribute('lang', 'fr');
+                document.body.classList.remove('font-ar');
+                document.body.classList.add('font-fr');
+                document.getElementById('langBtnText').innerText = 'العربية';
+            }
+
+            document.querySelectorAll('[data-lang]').forEach(element => {
+                const key = element.getAttribute('data-lang');
+                if (translations[currentLang][key]) {
+                    element.innerText = translations[currentLang][key];
+                }
+            });
+        }
+
+        // Automatic Hero Slider
+        let currentSlide = 0;
+        const totalSlides = 3;
+        let slideInterval;
+
+        function setSlide(index) {
+            currentSlide = index;
+            for (let i = 0; i < totalSlides; i++) {
+                const slide = document.getElementById(`slide-${i}`);
+                const dot = document.getElementById(`dot-${i}`);
+                const progressBar = dot.querySelector('.progress-bar');
+                
+                if (i === index) {
+                    slide.classList.remove('slide-hidden');
+                    slide.classList.add('slide-active');
+                    dot.classList.replace('bg-white/40', 'bg-white');
+                    dot.classList.add('w-12');
+                    progressBar.classList.add('progress-active');
+                } else {
+                    slide.classList.remove('slide-active');
+                    slide.classList.add('slide-hidden');
+                    dot.classList.replace('bg-white', 'bg-white/40');
+                    progressBar.classList.remove('progress-active');
+                }
+            }
+            restartSliderTimer();
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            setSlide(currentSlide);
+        }
+
+        function restartSliderTimer() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 5000);
+        }
+
+        window.onload = function() {
+            setSlide(0);
+            loadSavedData();
+        };
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+            
+            if (menu.classList.contains('hidden')) {
+                icon.classList.replace('fa-xmark', 'fa-bars');
+            } else {
+                icon.classList.replace('fa-bars', 'fa-xmark');
+            }
+        }
+
+        // --- ADMIN PANEL LOGIC ---
+        function openAdminModal() {
+            document.getElementById('adminModal').classList.remove('hidden');
+        }
+
+        function closeAdminModal() {
+            document.getElementById('adminModal').classList.add('hidden');
+        }
+
+        function checkAdminLogin() {
+            const user = document.getElementById('adminUser').value.trim();
+            const pass = document.getElementById('adminPass').value.trim();
+            const errDiv = document.getElementById('loginError');
+
+            // Simplified Credentials
+            if (user === 'admin' && pass === '1234') {
+                document.getElementById('adminLoginView').classList.add('hidden');
+                document.getElementById('adminDashboardView').classList.remove('hidden');
+                errDiv.classList.add('hidden');
+                
+                // Populate inputs with current values
+                document.getElementById('editDocName').value = document.getElementById('doctorNameDisplay').innerText;
+                document.getElementById('editDocImg').value = document.getElementById('doctorImg').src;
+                document.getElementById('editPhone1').value = document.getElementById('topPhone1').innerText;
+                document.getElementById('editPhone2').value = document.getElementById('phone2Display').innerText;
+                document.getElementById('editWhatsapp').value = document.getElementById('whatsappDisplay').innerText;
+                document.getElementById('editEmail').value = document.getElementById('emailDisplay').innerText;
+                document.getElementById('editAddress').value = document.getElementById('addressDisplay').innerText.trim();
+            } else {
+                errDiv.innerText = currentLang === 'fr' 
+                    ? "Nom d'utilisateur (admin) ou mot de passe (1234) incorrect."
+                    : "اسم المستخدم (admin) أو كلمة المرور (1234) غير صحيحة.";
+                errDiv.classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminDashboardView').classList.add('hidden');
+            document.getElementById('adminLoginView').classList.remove('hidden');
+            document.getElementById('adminUser').value = '';
+            document.getElementById('adminPass').value = '';
+        }
+
+        function saveAdminChanges() {
+            const docName = document.getElementById('editDocName').value;
+            const docImg = document.getElementById('editDocImg').value;
+            const logoUrl = document.getElementById('editLogoUrl').value;
+            const p1 = document.getElementById('editPhone1').value;
+            const p2 = document.getElementById('editPhone2').value;
+            const wa = document.getElementById('editWhatsapp').value;
+            const email = document.getElementById('editEmail').value;
+            const addr = document.getElementById('editAddress').value;
+
+            // Update DOM
+            if(docName) {
+                document.getElementById('doctorNameDisplay').innerText = docName;
+                document.getElementById('footerCredit').innerText = `Sous la direction de ${docName} - Kénitra`;
+            }
+            if(docImg) document.getElementById('doctorImg').src = docImg;
+            if(p1) {
+                document.getElementById('topPhone1').innerText = p1;
+                document.getElementById('phone1Display').innerText = p1;
+            }
+            if(p2) document.getElementById('phone2Display').innerText = p2;
+            if(wa) {
+                document.getElementById('topWhatsapp').innerText = wa;
+                document.getElementById('whatsappDisplay').innerText = wa;
+                document.getElementById('whatsappLinkDisplay').innerText = wa;
+            }
+            if(email) {
+                document.getElementById('emailDisplay').innerText = email;
+                document.getElementById('emailDisplay').href = `mailto:${email}`;
+            }
+            if(addr) document.getElementById('addressDisplay').innerText = addr;
+
+            if(logoUrl) {
+                const footerContainer = document.getElementById('footerLogoContainer');
+                footerContainer.innerHTML = `<img src="${logoUrl}" alt="Logo Saada" class="w-full h-full object-contain">`;
+            }
+
+            const dataToSave = { docName, docImg, logoUrl, p1, p2, wa, email, addr };
+            localStorage.setItem('saada_admin_data', JSON.stringify(dataToSave));
+
+            const successAlert = document.getElementById('saveSuccessAlert');
+            successAlert.innerText = currentLang === 'fr' ? "Modifications enregistrées avec succès !" : "تم حفظ التعديلات بنجاح!";
+            successAlert.classList.remove('hidden');
+            setTimeout(() => { successAlert.classList.add('hidden'); }, 3000);
+        }
+
+        function loadSavedData() {
+            const saved = localStorage.getItem('saada_admin_data');
+            if(saved) {
+                const d = JSON.parse(saved);
+                if(d.docName) {
+                    document.getElementById('doctorNameDisplay').innerText = d.docName;
+                    document.getElementById('footerCredit').innerText = `Sous la direction de ${d.docName} - Kénitra`;
+                }
+                if(d.docImg) document.getElementById('doctorImg').src = d.docImg;
+                if(d.p1) {
+                    document.getElementById('topPhone1').innerText = d.p1;
+                    document.getElementById('phone1Display').innerText = d.p1;
+                }
+                if(d.p2) document.getElementById('phone2Display').innerText = d.p2;
+                if(d.wa) {
+                    document.getElementById('topWhatsapp').innerText = d.wa;
+                    document.getElementById('whatsappDisplay').innerText = d.wa;
+                    document.getElementById('whatsappLinkDisplay').innerText = d.wa;
+                }
+                if(d.email) {
+                    document.getElementById('emailDisplay').innerText = d.email;
+                    document.getElementById('emailDisplay').href = `mailto:${d.email}`;
+                }
+                if(d.addr) document.getElementById('addressDisplay').innerText = d.addr;
+                if(d.logoUrl) {
+                    const footerContainer = document.getElementById('footerLogoContainer');
+                    footerContainer.innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain">`;
+                }
+            }
+        }
+
+        // Form Handlers
+        function handleAppointmentSubmit(e) {
+            e.preventDefault();
+            const alert = document.getElementById('rdvAlert');
+            alert.innerText = currentLang === 'fr' 
+                ? "Merci ! Votre demande de rendez-vous a bien été enregistrée. L'équipe du Laboratoire SAADA vous contactera dans les plus brefs délais."
+                : "شكراً لكم! تم تسجيل طلب الموعد بنجاح. سيقوم فريق مختبر السعادة بالاتصال بكم في أقرب وقت.";
+            alert.classList.remove('hidden');
+            e.target.reset();
+        }
+
+        function handleResultsSubmit(e) {
+            e.preventDefault();
+            const alert = document.getElementById('resultsAlert');
+            alert.innerText = currentLang === 'fr'
+                ? "Dossier trouvé ! Vos résultats sont en cours de chargement..."
+                : "تم العثور على الملف! جاري تحميل نتائجك...";
+            alert.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
