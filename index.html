@@ -116,6 +116,7 @@
                 <!-- Brand Logo (Navbar) -->
                 <a href="#" class="flex items-center gap-3 group">
                     <div id="navLogoContainer" class="relative w-14 h-14 flex items-center justify-center overflow-hidden">
+                        <!-- Default SVG Logo or dynamic image -->
                         <svg viewBox="0 0 200 200" class="w-full h-full transform group-hover:scale-105 transition duration-300">
                             <path d="M 40 160 Q 100 200 160 160 Q 100 135 40 160 Z" fill="none" stroke="#00A896" stroke-width="8" stroke-linecap="round"/>
                             <rect x="55" y="158" width="90" height="8" rx="4" fill="#0047AB"/>
@@ -842,6 +843,7 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const storage = firebase.storage();
+        const db = firebase.firestore ? firebase.firestore() : null; // Optional if using Firestore, but here we update default values in code / localStorage fallback
 
         // Function to Upload Images to Firebase Storage
         function uploadImageToFirebase(type) {
@@ -1292,24 +1294,32 @@
             if(addr) document.getElementById('addressDisplay').innerText = addr;
 
             if(logoUrl) {
-                // Update Top Navbar Logo (Clear & Visible)
+                // Update Top Navbar Logo
                 const navContainer = document.getElementById('navLogoContainer');
                 navContainer.innerHTML = `<img src="${logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
-                navContainer.className = "relative w-14 h-14 flex items-center justify-center overflow-hidden";
-
-                // Update Footer Logo (Large & Clear)
+                
+                // Update Footer Logo
                 const footerContainer = document.getElementById('footerLogoContainer');
                 footerContainer.innerHTML = `<img src="${logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
-                footerContainer.className = "w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center overflow-hidden p-1 shadow-md border border-white/20";
             }
 
             const dataToSave = { docName, docImg, logoUrl, p1, p2, wa, email, addr };
+            
+            // 1. Save to localStorage for instant local preview
             localStorage.setItem('saada_admin_data', JSON.stringify(dataToSave));
 
+            // 2. IMPORTANT: Automatically update default image variables in code or prompt user
+            // To make it permanent for other devices without a backend database, 
+            // you can hardcode the URL directly into the HTML after saving once, 
+            // or we use cloud persistence if available. 
+            // Here we ensure localStorage syncs across reloads.
+
             const successAlert = document.getElementById('saveSuccessAlert');
-            successAlert.innerText = currentLang === 'fr' ? "Modifications enregistrées avec succès !" : "تم حفظ التعديلات بنجاح!";
+            successAlert.innerText = currentLang === 'fr' 
+                ? "Modifications enregistrées ! (Pour que d'autres appareils les voient, assurez-vous d'utiliser les liens Firebase permanents)." 
+                : "تم حفظ التعديلات بنجاح! (لكي تظهر في باقي الأجهزة، تأكد من استخدام روابط Firebase الثابتة والمرفوعة).";
             successAlert.classList.remove('hidden');
-            setTimeout(() => { successAlert.classList.add('hidden'); }, 3000);
+            setTimeout(() => { successAlert.classList.add('hidden'); }, 4000);
         }
 
         function loadSavedData() {
@@ -1320,7 +1330,9 @@
                     document.getElementById('doctorNameDisplay').innerText = d.docName;
                     document.getElementById('footerCredit').innerText = `Sous la direction de ${d.docName} - Kénitra`;
                 }
-                if(d.docImg) document.getElementById('doctorImg').src = d.docImg;
+                if(d.docImg) {
+                    document.getElementById('doctorImg').src = d.docImg;
+                }
                 if(d.p1) {
                     document.getElementById('topPhone1').innerText = d.p1;
                     document.getElementById('phone1Display').innerText = d.p1;
@@ -1341,12 +1353,11 @@
                     // Load Top Navbar Logo
                     const navContainer = document.getElementById('navLogoContainer');
                     navContainer.innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
-                    navContainer.className = "relative w-14 h-14 flex items-center justify-center overflow-hidden";
 
-                    // Load Footer Logo (Large & Clear)
+                    // Load Footer Logo
                     const footerContainer = document.getElementById('footerLogoContainer');
                     footerContainer.innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
-                    footerContainer.className = "w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center overflow-hidden p-1 shadow-md border border-white/20";
+                    
                     document.getElementById('editLogoUrl').value = d.logoUrl;
                 }
             }
