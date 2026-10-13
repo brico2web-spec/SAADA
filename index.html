@@ -13,6 +13,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Firebase SDKs (Compat v9) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -763,15 +767,27 @@
                         <input type="text" id="editDocName" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
                     </div>
 
+                    <!-- Upload Doctor Image via Firebase -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_doc_img">Lien de la photo de la Médecin (URL)</label>
-                        <input type="url" id="editDocImg" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Photo de la Médecin (Sélectionner depuis l'appareil)</label>
+                        <div class="flex gap-2">
+                            <input type="file" id="uploadDocFile" accept="image/*" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-saada-teal file:text-white hover:file:bg-teal-600">
+                            <button type="button" onclick="uploadImageToFirebase('doctor')" class="bg-saada-blue text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-saada-deepBlue transition">Uploader</button>
+                        </div>
+                        <input type="url" id="editDocImg" class="mt-2 w-full px-3 py-2 rounded-xl border border-slate-200 text-xs text-slate-500 bg-slate-100" placeholder="URL Firebase de l'image de la médecin">
                     </div>
 
+                    <!-- Upload Logo Image via Firebase -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_logo_url">Lien du Logo (URL ou Image)</label>
-                        <input type="url" id="editLogoUrl" placeholder="Laissez vide pour garder le logo vectoriel par défaut" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Logo du Laboratoire (Sélectionner depuis l'appareil)</label>
+                        <div class="flex gap-2">
+                            <input type="file" id="uploadLogoFile" accept="image/*" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-saada-teal file:text-white hover:file:bg-teal-600">
+                            <button type="button" onclick="uploadImageToFirebase('logo')" class="bg-saada-blue text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-saada-deepBlue transition">Uploader</button>
+                        </div>
+                        <input type="url" id="editLogoUrl" class="mt-2 w-full px-3 py-2 rounded-xl border border-slate-200 text-xs text-slate-500 bg-slate-100" placeholder="URL Firebase du Logo">
                     </div>
+
+                    <div id="uploadStatus" class="text-xs font-semibold text-center text-saada-teal"></div>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
@@ -810,8 +826,67 @@
         </div>
     </div>
 
-    <!-- JavaScript Logic -->
+    <!-- JavaScript Logic & Firebase Initialization -->
     <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyD-nLXSr0JEJUXB1EPwpFn7fPhYT5_ouxU",
+          authDomain: "saada-e53f4.firebaseapp.com",
+          projectId: "saada-e53f4",
+          storageBucket: "saada-e53f4.firebasestorage.app",
+          messagingSenderId: "236115103905",
+          appId: "1:236115103905:web:ed7828abb44b997161a0e0",
+          measurementId: "G-XM6F1LQGK8"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const storage = firebase.storage();
+
+        // Function to Upload Images to Firebase Storage
+        function uploadImageToFirebase(type) {
+            const fileInput = type === 'doctor' ? document.getElementById('uploadDocFile') : document.getElementById('uploadLogoFile');
+            const statusDiv = document.getElementById('uploadStatus');
+
+            if (fileInput.files.length === 0) {
+                statusDiv.innerText = "Veuillez sélectionner un fichier image d'abord ! / المرجو اختيار صورة أولاً";
+                statusDiv.className = "text-xs font-semibold text-center text-red-600";
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const storageRef = storage.ref(`images/${Date.now()}_${file.name}`);
+            
+            statusDiv.innerText = "Téléchargement en cours... / جاري رفع الصورة...";
+            statusDiv.className = "text-xs font-semibold text-center text-saada-teal";
+
+            const uploadTask = storageRef.put(file);
+
+            uploadTask.on('state_changed', 
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    statusDiv.innerText = `Téléchargement : ${Math.round(progress)}% / جاري الرفع...`;
+                }, 
+                (error) => {
+                    console.error(error);
+                    statusDiv.innerText = "Erreur lors du téléchargement : " + error.message;
+                    statusDiv.className = "text-xs font-semibold text-center text-red-600";
+                }, 
+                () => {
+                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                        statusDiv.innerText = "Téléchargement réussi ! / تم رفع الصورة بنجاح!";
+                        statusDiv.className = "text-xs font-semibold text-center text-emerald-600";
+                        
+                        if (type === 'doctor') {
+                            document.getElementById('editDocImg').value = downloadURL;
+                        } else {
+                            document.getElementById('editLogoUrl').value = downloadURL;
+                        }
+                    });
+                }
+            );
+        }
+
         // Dictionary for Language Switching
         const translations = {
             fr: {
@@ -1158,13 +1233,11 @@
             const pass = document.getElementById('adminPass').value.trim();
             const errDiv = document.getElementById('loginError');
 
-            // Simplified Credentials
             if (user === 'admin' && pass === '1234') {
                 document.getElementById('adminLoginView').classList.add('hidden');
                 document.getElementById('adminDashboardView').classList.remove('hidden');
                 errDiv.classList.add('hidden');
                 
-                // Populate inputs with current values
                 document.getElementById('editDocName').value = document.getElementById('doctorNameDisplay').innerText;
                 document.getElementById('editDocImg').value = document.getElementById('doctorImg').src;
                 document.getElementById('editPhone1').value = document.getElementById('topPhone1').innerText;
@@ -1197,7 +1270,6 @@
             const email = document.getElementById('editEmail').value;
             const addr = document.getElementById('editAddress').value;
 
-            // Update DOM
             if(docName) {
                 document.getElementById('doctorNameDisplay').innerText = docName;
                 document.getElementById('footerCredit').innerText = `Sous la direction de ${docName} - Kénitra`;
@@ -1281,7 +1353,7 @@
             alert.innerText = currentLang === 'fr'
                 ? "Dossier trouvé ! Vos résultats sont en cours de chargement..."
                 : "تم العثور على الملف! جاري تحميل نتائجك...";
-            alert.classList.remove('hidden');
+            alert.classList.add('hidden');
         }
     </script>
 </body>
