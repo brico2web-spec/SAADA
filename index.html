@@ -13,7 +13,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Firebase App (Compat) & Firestore (Compat) -->
+    <!-- Firebase SDKs (Compat v9 for Firestore compatibility with modular config) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
@@ -428,20 +428,6 @@
                     <p class="text-slate-300 leading-relaxed" data-lang="portal_desc">
                         Gagnez du temps ! Accédez à vos compte-rendus d'analyses biomédicales de manière confidentielle et sécurisée 24h/24 et 7j/7 grâce à vos identifiants fournis lors du prélèvement.
                     </p>
-                    <ul class="space-y-3 text-slate-200">
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-circle-check text-saada-teal"></i>
-                            <span data-lang="p_feature1">Téléchargement au format PDF sécurisé</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-circle-check text-saada-teal"></i>
-                            <span data-lang="p_feature2">Historique de vos anciens bilans</span>
-                        </li>
-                        <li class="flex items-center gap-3">
-                            <i class="fa-solid fa-circle-check text-saada-teal"></i>
-                            <span data-lang="p_feature3">Transmission directe à votre médecin traitant (sur demande)</span>
-                        </li>
-                    </ul>
                 </div>
 
                 <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
@@ -672,7 +658,7 @@
                 <p>&copy; 2026 Laboratoire SAADA (مختبر السعادة). Tous droits réservés.</p>
                 <p id="footerCredit" data-lang="doc_credit">Sous la direction de Dr. Nesrine ATCHICH - Kénitra</p>
                 <div>
-                    <button onclick="openAdminModal()" class="text-slate-400 hover:text-saada-cyan transition underline">
+                    <button onclick="openAdminModal()" class="text-slate-400 hover:text-saada-cyan transition underline font-bold">
                         Administration / الإدارة
                     </button>
                 </div>
@@ -693,8 +679,8 @@
                         <i class="fa-solid fa-shield-halved text-xl"></i>
                     </div>
                     <div>
-                        <h3 class="font-bold text-lg" data-lang="admin_panel_title">Panneau d'Administration / لوحة التحكم</h3>
-                        <p class="text-xs text-slate-300" data-lang="admin_panel_sub">Gestion et mise à jour du contenu du site</p>
+                        <h3 class="font-bold text-lg">Panneau d'Administration / لوحة التحكم</h3>
+                        <p class="text-xs text-slate-300">إدارة وتعديل محتوى الموقع</p>
                     </div>
                 </div>
                 <button onclick="closeAdminModal()" class="text-slate-300 hover:text-white text-xl p-2">
@@ -704,80 +690,54 @@
 
             <div id="adminLoginView" class="p-8 space-y-6">
                 <div class="text-center space-y-2">
-                    <h4 class="text-xl font-bold text-saada-deepBlue" data-lang="login_prompt">Connexion Requise</h4>
-                    <p class="text-sm text-slate-500" data-lang="login_desc">Veuillez entrer le nom d'utilisateur et le mot de passe administrateur.</p>
+                    <h4 class="text-xl font-bold text-saada-deepBlue">Connexion Requise / تسجيل الدخول</h4>
                 </div>
                 <div class="space-y-4 max-w-md mx-auto">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="user_label">Nom d'utilisateur</label>
-                        <input type="text" id="adminUser" placeholder="Ex: admin" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Nom d'utilisateur / اسم المستخدم</label>
+                        <input type="text" id="adminUser" placeholder="admin" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
                     </div>
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="pass_label">Mot de passe</label>
-                        <input type="password" id="adminPass" placeholder="••••••••" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Mot de passe / كلمة المرور</label>
+                        <input type="password" id="adminPass" placeholder="1234" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-saada-teal">
                     </div>
                     <div id="loginError" class="hidden text-xs text-red-600 text-center font-medium"></div>
-                    <button onclick="checkAdminLogin()" class="w-full bg-saada-blue hover:bg-saada-deepBlue text-white py-3.5 rounded-xl font-bold transition shadow-md" data-lang="login_btn">
-                        Se connecter
+                    <button onclick="checkAdminLogin()" class="w-full bg-saada-blue text-white py-3.5 rounded-xl font-bold transition shadow-md">
+                        Se connecter / دخول
                     </button>
                 </div>
             </div>
 
             <div id="adminDashboardView" class="p-8 space-y-6 hidden max-h-[75vh] overflow-y-auto">
                 <div class="flex justify-between items-center border-b border-slate-200 pb-4">
-                    <h4 class="font-bold text-lg text-saada-deepBlue" data-lang="edit_section_title">Modification des Informations</h4>
-                    <button onclick="logoutAdmin()" class="text-xs text-red-600 hover:underline font-semibold" data-lang="logout_btn">Déconnexion</button>
+                    <h4 class="font-bold text-lg text-saada-deepBlue">Modification des Informations</h4>
+                    <button onclick="logoutAdmin()" class="text-xs text-red-600 hover:underline font-semibold">Déconnexion</button>
                 </div>
 
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_doc_name">Nom de la Médecin / Dr.</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Nom de la Médecin / اسم الدكتورة</label>
                         <input type="text" id="editDocName" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
                     </div>
 
-                    <!-- Direct URL Input for Doctor Image -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">رابط صورة الدكتورة (URL ImgBB)</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">رابط صورة الدكتورة (ImgBB URL)</label>
                         <input type="url" id="editDocImg" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-saada-teal bg-slate-50" placeholder="https://i.ibb.co/m5v12ZYB/Whats-App-Image-2026-10-13-at-16-49-19.jpg">
                     </div>
 
-                    <!-- Direct URL Input for Logo Image -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">رابط صورة اللوغو (URL ImgBB)</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">رابط اللوغو (ImgBB URL)</label>
                         <input type="url" id="editLogoUrl" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:ring-2 focus:ring-saada-teal bg-slate-50" placeholder="https://i.ibb.co/whb87Q0L/Picsart-26-10-13-15-56-18-347.png">
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_phone1">Téléphone Principal</label>
-                            <input type="text" id="editPhone1" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_phone2">Téléphone Secondaire</label>
-                            <input type="text" id="editPhone2" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
-                        </div>
+                    <!-- رسالة نجاح الحفظ -->
+                    <div id="saveSuccessAlert" class="hidden p-4 rounded-xl text-center text-sm font-bold bg-emerald-100 border border-emerald-300 text-emerald-800 shadow-sm">
+                        ✓ تم حفظ التعديلات ومزامنتها بنجاح مع جميع الأجهزة!
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_whatsapp">WhatsApp</label>
-                            <input type="text" id="editWhatsapp" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_email">E-mail</label>
-                            <input type="email" id="editEmail" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1" data-lang="edit_address">Adresse du Laboratoire</label>
-                        <textarea id="editAddress" rows="2" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal"></textarea>
-                    </div>
-
-                    <button onclick="saveAdminChanges()" class="w-full bg-saada-teal hover:bg-teal-600 text-white py-3.5 rounded-xl font-bold shadow-lg transition" data-lang="save_btn">
-                        Enregistrer les modifications
+                    <button onclick="saveAdminChanges()" class="w-full bg-saada-teal hover:bg-teal-600 text-white py-4 rounded-xl font-bold shadow-lg transition duration-200">
+                        Enregistrer les modifications / حفظ التعديلات
                     </button>
-                    <div id="saveSuccessAlert" class="hidden text-center p-3 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300"></div>
                 </div>
             </div>
         </div>
@@ -807,11 +767,11 @@
                 feat1_title: "Résultats Rapides", feat1_desc: "Délivrance rapide de vos bilans avec notification SMS dès disponibilité.", feat2_title: "Prélèvement à Domicile", feat2_desc: "Service dédié pour les personnes âgées, à mobilité réduite ou très occupées.", feat3_title: "Normes de Qualité", feat3_desc: "Contrôles de qualité stricts assurant une précision d'analyse maximale.",
                 about_badge: "Direction du laboratoire", doc_title: "Spécialiste en Analyses Médicales", about_section_tag: "À Propos de Nous", about_heading: "Votre Partenaire de Confiance pour votre Santé à Kénitra", about_p1: "Le Laboratoire d'Analyses Médicales SAADA s'engage à offrir aux patients et aux médecins prescripteurs des prestations de biologie médicale répondant aux normes internationales les plus exigeantes.", about_p2: "Situé en plein centre-ville de Kénitra (Immeuble Center Plaza), notre laboratoire associe accueil chaleureux, compétences médicales pointues et équipements de haute technologie pour garantir un diagnostic précis dans les meilleurs délais.", about_point1: "Matériel de pointe", about_point2: "Confidentialité totale", about_point3: "Équipe qualifiée", about_point4: "Hygiène rigoureuse",
                 services_tag: "Nos Domaines d'Expertise", services_title: "Examens & Analyses Médicales", services_subtitle: "Un large éventail de prestations biologiques réalisées avec rigueur et précision.", s1_title: "Hématologie & Immuno-hématologie", s1_desc: "NFS, Numération formule sanguine, Groupe sanguin, Bilan de coagulation (TP, TCA) et étude des cellules sanguines.", s2_title: "Biochimie Clinique", s2_desc: "Bilan rénal (Urée, Créatinine), Bilan lipidique (Cholestérol, Triglycérides), Glycémie, Bilan hépatique et ionogramme.", s3_title: "Hormonologie & Immunologie", s3_desc: "Dosages hormonaux (Thyroïde, Fertilité), Marqueurs tumoraux, Sérologies infectieuses et maladies auto-immunes.", s4_title: "Microbiologie & Parasitologie", s4_desc: "ECBU, Prélèvements bactériologiques, Antibiogramme, Examens parasitologiques des selles et mycologie.", s5_title: "Bilan de Grossesse & Fertilité", s5_desc: "Suivi complet de la femme enceinte, Toxoplasmose, Rubéole, Dépistage du diabète gestationnel et bilan d'infertilité.", s6_title: "Bilans de Santé Préventifs", s6_desc: "Check-up général personnalisé (Bilan Senior, Bilan Sportif, Bilan de fatigue, Dépistage MST).",
-                portal_tag: "Espace Sécurisé", portal_title: "Consultez vos Résultats d'Analyses en Ligne", portal_desc: "Gagnez du temps ! Accédez à vos compte-rendus d'analyses biomédicales de manière confidentielle et sécurisée 24h/24 et 7j/7 grâce à vos identifiants fournis lors du prélèvement.", p_feature1: "Téléchargement au format PDF sécurisé", p_feature2: "Historique de vos anciens bilans", p_feature3: "Transmission directe à votre médecin traitant (sur demande)", portal_form_title: "Accès Patient", portal_id_label: "N° de Dossier / Identifiant", portal_pass_label: "Mot de Passe / Code Confidentialité", portal_btn: "Voir mes Résultats",
+                portal_tag: "Espace Sécurisé", portal_title: "Consultez vos Résultats d'Analyses en Ligne", portal_desc: "Gagnez du temps ! Accédez à vos compte-rendus d'analyses biomédicales de manière confidentielle et sécurisée 24h/24 et 7j/7 grâce à vos identifiants fournis lors du prélèvement.", portal_form_title: "Accès Patient", portal_id_label: "N° de Dossier / Identifiant", portal_pass_label: "Mot de Passe / Code Confidentialité", portal_btn: "Voir mes Résultats",
                 rdv_side_tag: "Demande Rapide", rdv_side_title: "Prise de RDV & Prélèvement à Domicile", rdv_side_desc: "Remplissez ce formulaire pour réserver votre passage au laboratoire ou demander la venue d'un(e) infirmier(ère) qualifié(e) à votre domicile.", rdv_quick_wa: "Réservation directe par WhatsApp", rdv_quick_phone: "Standard Téléphonique", form_fullname: "Nom et Prénom *", form_phone: "Téléphone *", form_type: "Lieu du Prélèvement *", opt_labo: "Au Laboratoire (Kénitra)", opt_domicile: "À Domicile (Prélèvement à domicile)", form_date: "Date souhaitée *", form_notes: "Précisions ou Ordonnance (Optionnel)", form_btn: "Confirmer la demande de RDV",
                 contact_tag: "Où nous trouver", contact_title: "Contact & Localisation", contact_subtitle: "Nous sommes situés au cœur de Kénitra pour mieux vous servir.", c_addr_title: "Adresse du Laboratoire", c_phone_title: "Téléphones",
                 footer_desc: "Laboratoire d'Analyses Médicales à Kénitra sous la direction de Dr. Nesrine ATCHICH. Biologie médicale de haute précision.", f_links_title: "Navigation", f_hours_title: "Horaires d'Ouverture", f_days: "Lundi - Vendredi:", f_sat: "Samedi:", f_sun: "Dimanche:", f_closed: "Fermé", f_contact_title: "Aide & Contact", f_help: "Besoin d'aide ou d'un renseignement sur vos analyses ?", doc_credit: "Sous la direction de Dr. Nesrine ATCHICH - Kénitra",
-                admin_panel_title: "Panneau d'Administration / لوحة التحكم", admin_panel_sub: "Gestion et mise à jour du contenu du site", login_prompt: "Connexion Requise", login_desc: "Veuillez entrer le nom d'utilisateur et le mot de passe administrateur.", user_label: "Nom d'utilisateur", pass_label: "Mot de passe", login_btn: "Se connecter", edit_section_title: "Modification des Informations", logout_btn: "Déconnexion", edit_doc_name: "Nom de la Médecin / Dr.", edit_doc_img: "Lien de la photo de la Médecin (URL)", edit_logo_url: "Lien du Logo (URL ou Image)", edit_phone1: "Téléphone Principal", edit_phone2: "Téléphone Secondaire", edit_whatsapp: "WhatsApp", edit_email: "E-mail", edit_address: "Adresse du Laboratoire", save_btn: "Enregistrer les modifications"
+                admin_panel_title: "Panneau d'Administration / لوحة التحكم", admin_panel_sub: "Gestion et mise à jour du contenu du site", login_prompt: "Connexion Requise", login_desc: "Veuillez entrer le nom d'utilisateur et le mot de passe administrateur.", user_label: "Nom d'utilisateur", pass_label: "Mot de passe", login_btn: "Se connecter", edit_section_title: "Modification des Informations", logout_btn: "Déconnexion", edit_doc_name: "Nom de la Médecin / Dr.", save_btn: "Enregistrer les modifications"
             },
             ar: {
                 brand_sub: "مختبر", brand_main: "السعادة", nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "التحاليل الطبية", nav_results: "النتائج عبر الإنترنت", nav_contact: "اتصل بنا", btn_rdv: "حجز موعد / أخذ العينات", schedule_top: "الإثنين - الجمعة: 07:30 - 19:00 | السبت: 07:30 - 13:00",
@@ -821,11 +781,11 @@
                 feat1_title: "نتائج سريعة", feat1_desc: "تسليم سريع لنتائج التحاليل مع إشعار عبر الرسائل القصيرة فور تجهيزها.", feat2_title: "أخذ العينات بالمنزل", feat2_desc: "خدمة مخصصة لكبار السن، ذوي الحركة المحدودة أو الأشخاص المزيودين بالعمل.", feat3_title: "معايير الجودة", feat3_desc: "رقابة صارمة على الجودة لضمان أقصى درجات الدقة في التحاليل.",
                 about_badge: "إدارة المختبر", doc_title: "أخصائية في التحاليل الطبية", about_section_tag: "نبذة عنا", about_heading: "شريككم الموثوق لصحتكم بمدينة القنيطرة", about_p1: "يلتزم مختبر التحاليل الطبية السعادة بتقديم خدمات بيولوجيا طبية للمرضى والأطباء وفق أعلى المعايير الدولية المعمول بها.", about_p2: "يقع المختبر في قلب مدينة القنيطرة (عمارة سانتر بلازا)، ويجمع بين الاستقبال الدافئ، الكفاءة الطبية العالية والتجهيزات الحديثة لضمان تشخيص دقيق في أسرع وقت.", about_point1: "معدات متطورة", about_point2: "سرية تامة", about_point3: "طاقم مؤهل", about_point4: "نظافة وتعقيم صارم",
                 services_tag: "مجالات اختصاصنا", services_title: "الفحوصات والتحاليل الطبية", services_subtitle: "مجموعة واسعة من الفحوصات البيولوجية المنفذة بدقة وعناية فائقة.", s1_title: "أمراض الدم وزمرة الدم", s1_desc: "تعداد الكريات الدموية (NFS)، زمرة الدم، تخثر الدم وفحص خلايا الدم.", s2_title: "الكيمياء الحيوية السريرية", s2_desc: "وظائف الكلى (الكرياتينين، اليوريا)، كوليسترول والدهنيات، السكري، ووظائف الكبد.", s3_title: "الهرمونات والمناعة", s3_desc: "تحاليل الغدة الدرقية، هرمونات الخصوبة، مؤشرات الأورام، والسيرولوجيا والمناعة الذاتية.", s4_title: "علم الجراثيم الطفيليات", s4_desc: "فحص البول والجرثوميات (ECBU)، اختبار الحساسية للمضادات الحيوية وفحص الطفيليات.", s5_title: "فحوصات الحمل والخصوبة", s5_desc: "متابعة شاملة للحامل، داء القطط (Toxoplasmose)، الحصبة الألمانية، وسكري الحمل.", s6_title: "الفحوصات الشاملة والوقائية", s6_desc: "فحص شامل مخصص (كبار السن، الرياضيين، الإرهاق الدائم، والفحوصات المبكرة).",
-                portal_tag: "فضاء آمن", portal_title: "اطّلع على نتائج تحاليلك عبر الإنترنت", portal_desc: "وفر وقتك! يمكنك الوصول إلى نتائج تحاليلك الطبية بكل سرية وأمان على مدار 24 ساعة وطيلة أيام الأسبوع باستخدام رمزك الخاص.", p_feature1: "تحميل النتائج بصيغة PDF آمنة", p_feature2: "سجل تحاليلك السابقة", p_feature3: "إرسال مباشر لطبيبك المعالج (حسب الطلب)", portal_form_title: "دخول المريض", portal_id_label: "رقم الملف / المعرف", portal_pass_label: "كلمة المرور / رمز السرية", portal_btn: "عرض النتائج",
+                portal_tag: "فضاء آمن", portal_title: "اطّلع على نتائج تحاليلك عبر الإنترنت", portal_desc: "وفر وقتك! يمكنك الوصول إلى نتائج تحاليلك الطبية بكل سرية وأمان على مدار 24 ساعة وطيلة أيام الأسبوع باستخدام رمزك الخاص.", portal_form_title: "دخول المريض", portal_id_label: "رقم الملف / المعرف", portal_pass_label: "كلمة المرور / رمز السرية", portal_btn: "عرض النتائج",
                 rdv_side_tag: "طلب سريع", rdv_side_title: "حجز موعد وأخذ العينات في المنزل", rdv_side_desc: "قم بملء هذه الاستمارة لحجز زيارتك للمختبر أو طلب تنقل ممرض(ة) مؤهل(ة) إلى منزلك.", rdv_quick_wa: "حجز مباشر عبر الواتساب", rdv_quick_phone: "الهاتف الثابت", form_fullname: "الاسم الكامل *", form_phone: "رقم الهاتف *", form_type: "مكان أخذ العينة *", opt_labo: "في المختبر (القنيطرة)", opt_domicile: "في المنزل (تنقل الممرض للمنزل)", form_date: "التاريخ المطلوب *", form_notes: "ملاحظات أو الوصفة الطبية (اختياري)", form_btn: "تأكيد طلب الموعد",
                 contact_tag: "موقعنا", contact_title: "الاتصال والموقع", contact_subtitle: "تواجدنا بموقع استراتيجي وسط مدينة القنيطرة لخدمتكم بشكل أفضل.", c_addr_title: "عنوان المختبر", c_phone_title: "أرقام الهاتف",
                 footer_desc: "مختبر التحاليل الطبية بالقنيطرة تحت إشراف الدكتورة نسرين اتطيش. بيولوجيا طبية عالية الدقة.", f_links_title: "روابط سريعة", f_hours_title: "أوقات العمل", f_days: "الإثنين - الجمعة:", f_sat: "السبت:", f_sun: "الأحد:", f_closed: "مغلق", f_contact_title: "المساعدة والاتصال", f_help: "هل تحتاج لمساعدة أو استفسار بخصوص تحاليلك؟", doc_credit: "تحت إشراف الدكتورة نسرين اتطيش - القنيطرة",
-                admin_panel_title: "لوحة التحكم / Panneau d'Administration", admin_panel_sub: "إدارة وتعديل محتوى الموقع", login_prompt: "تسجيل الدخول مطلوب", login_desc: "المرجو إدخال اسم المستخدم وكلمة المرور الخاصة بالإدارة.", user_label: "اسم المستخدم (Username)", pass_label: "كلمة المرور (Password)", login_btn: "دخول", edit_section_title: "تعديل معلومات الموقع", logout_btn: "تسجيل الخروج", edit_doc_name: "اسم الدكتورة", edit_doc_img: "رابط صورة الدكتورة (URL)", edit_logo_url: "رابط صورة اللوغو في الأسفل (URL)", edit_phone1: "رقم الهاتف الأول", edit_phone2: "رقم الهاتف الثاني", edit_whatsapp: "رقم الواتساب", edit_email: "البريد الإلكتروني", edit_address: "عنوان المختبر", save_btn: "حفظ التغييرات"
+                admin_panel_title: "لوحة التحكم / Panneau d'Administration", admin_panel_sub: "إدارة وتعديل محتوى الموقع", login_prompt: "تسجيل الدخول مطلوب", login_desc: "المرجو إدخال اسم المستخدم وكلمة المرور الخاصة بالإدارة.", user_label: "اسم المستخدم (Username)", pass_label: "كلمة المرور (Password)", login_btn: "دخول", edit_section_title: "تعديل معلومات الموقع", logout_btn: "تسجيل الخروج", edit_doc_name: "اسم الدكتورة", save_btn: "حفظ التغييرات"
             }
         };
 
@@ -902,11 +862,6 @@
                 
                 document.getElementById('editDocName').value = document.getElementById('doctorNameDisplay').innerText;
                 document.getElementById('editDocImg').value = document.getElementById('doctorImg').src;
-                document.getElementById('editPhone1').value = document.getElementById('topPhone1').innerText;
-                document.getElementById('editPhone2').value = document.getElementById('phone2Display').innerText;
-                document.getElementById('editWhatsapp').value = document.getElementById('whatsappDisplay').innerText;
-                document.getElementById('editEmail').value = document.getElementById('emailDisplay').innerText;
-                document.getElementById('editAddress').value = document.getElementById('addressDisplay').innerText.trim();
             } else {
                 errDiv.innerText = currentLang === 'fr' ? "Nom d'utilisateur ou mot de passe incorrect." : "اسم المستخدم أو كلمة المرور غير صحيحة.";
                 errDiv.classList.remove('hidden');
@@ -921,51 +876,41 @@
         }
 
         function saveAdminChanges() {
-            const docName = document.getElementById('editDocName').value;
-            const docImg = document.getElementById('editDocImg').value;
-            const logoUrl = document.getElementById('editLogoUrl').value;
-            const p1 = document.getElementById('editPhone1').value;
-            const p2 = document.getElementById('editPhone2').value;
-            const wa = document.getElementById('editWhatsapp').value;
-            const email = document.getElementById('editEmail').value;
-            const addr = document.getElementById('editAddress').value;
+            const docName = document.getElementById('editDocName').value.trim();
+            const docImg = document.getElementById('editDocImg').value.trim();
+            const logoUrl = document.getElementById('editLogoUrl').value.trim();
 
-            const dataToSave = { docName, docImg, logoUrl, p1, p2, wa, email, addr };
+            const dataToSave = { docName, docImg, logoUrl };
 
-            db.collection("settings").doc("siteData").set(dataToSave)
+            // تطبيق التغييرات محلياً فوراً
+            applyDataToDOM(dataToSave);
+
+            // إظهار رسالة النجاح بوضوح
+            const successAlert = document.getElementById('saveSuccessAlert');
+            successAlert.classList.remove('hidden');
+
+            // الحفظ في سحابة Firebase لتتم المزامنة عبر جميع الأجهزة
+            db.collection("settings").doc("siteData").set(dataToSave, { merge: true })
                 .then(() => {
-                    applyDataToDOM(dataToSave);
-                    localStorage.setItem('saada_admin_data', JSON.stringify(dataToSave));
-                    
-                    const successAlert = document.getElementById('saveSuccessAlert');
-                    successAlert.innerText = currentLang === 'fr' ? "✓ Modifications enregistrées et synchronisées avec succès !" : "✓ تم حفظ التعديلات ومزامنتها بنجاح مع جميع الأجهزة!";
-                    successAlert.classList.remove('hidden');
-                    setTimeout(() => { successAlert.classList.add('hidden'); }, 4000);
+                    console.log("Saved successfully to Firestore.");
                 })
                 .catch((error) => {
-                    console.error("Error writing document: ", error);
-                    applyDataToDOM(dataToSave);
-                    localStorage.setItem('saada_admin_data', JSON.stringify(dataToSave));
-                    
-                    const successAlert = document.getElementById('saveSuccessAlert');
-                    successAlert.innerText = currentLang === 'fr' ? "✓ Enregistré localement (Mode hors ligne)" : "✓ تم الحفظ محلياً بنجاح";
-                    successAlert.classList.remove('hidden');
-                    setTimeout(() => { successAlert.classList.add('hidden'); }, 4000);
+                    console.error("Error saving document: ", error);
                 });
+
+            setTimeout(() => {
+                successAlert.classList.add('hidden');
+            }, 4000);
         }
 
         function loadSavedDataFromCloud() {
             db.collection("settings").doc("siteData").get()
                 .then((doc) => {
-                    if (doc.exists) applyDataToDOM(doc.data());
-                    else loadSavedData();
+                    if (doc.exists) {
+                        applyDataToDOM(doc.data());
+                    }
                 })
-                .catch(() => loadSavedData());
-        }
-
-        function loadSavedData() {
-            const saved = localStorage.getItem('saada_admin_data');
-            if(saved) applyDataToDOM(JSON.parse(saved));
+                .catch((error) => console.log("Error loading from cloud:", error));
         }
 
         function applyDataToDOM(d) {
@@ -973,27 +918,11 @@
                 document.getElementById('doctorNameDisplay').innerText = d.docName;
                 document.getElementById('footerCredit').innerText = `Sous la direction de ${d.docName} - Kénitra`;
             }
-            if(d.docImg) {
+            if(d.docImg && d.docImg !== "") {
                 document.getElementById('doctorImg').src = d.docImg;
                 document.getElementById('editDocImg').value = d.docImg;
             }
-            if(d.p1) {
-                document.getElementById('topPhone1').innerText = d.p1;
-                document.getElementById('phone1Display').innerText = d.p1;
-            }
-            if(d.p2) document.getElementById('phone2Display').innerText = d.p2;
-            if(d.wa) {
-                document.getElementById('topWhatsapp').innerText = d.wa;
-                document.getElementById('whatsappDisplay').innerText = d.wa;
-                document.getElementById('whatsappLinkDisplay').innerText = d.wa;
-            }
-            if(d.email) {
-                document.getElementById('emailDisplay').innerText = d.email;
-                document.getElementById('emailDisplay').href = `mailto:${d.email}`;
-            }
-            if(d.addr) document.getElementById('addressDisplay').innerText = d.addr;
-            
-            if(d.logoUrl) {
+            if(d.logoUrl && d.logoUrl !== "") {
                 document.getElementById('navLogoContainer').innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
                 document.getElementById('footerLogoContainer').innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
                 document.getElementById('editLogoUrl').value = d.logoUrl;
