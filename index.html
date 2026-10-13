@@ -13,9 +13,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Firebase SDKs (Compat v9) -->
+    <!-- Firebase SDKs (Compat v9) for Database Sync -->
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-storage-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
 
     <script>
@@ -46,7 +45,6 @@
         .font-ar { font-family: 'Alexandria', sans-serif; }
         .font-fr { font-family: 'Plus Jakarta Sans', sans-serif; }
         
-        /* Smooth Slide Animations for Hero Slider without arrows */
         .slide-fade {
             transition: opacity 1s ease-in-out, transform 1s ease-in-out;
         }
@@ -63,7 +61,6 @@
             position: relative;
         }
 
-        /* Indicator Progress Bar */
         @keyframes progress {
             0% { width: 0%; }
             100% { width: 100%; }
@@ -100,7 +97,6 @@
                     <i class="fa-regular fa-clock text-saada-cyan"></i>
                     <span data-lang="schedule_top">Lun - Ven: 07:30 - 19:00 | Sam: 07:30 - 13:00</span>
                 </span>
-                <!-- Language Toggle Button -->
                 <button id="langToggleBtn" onclick="toggleLanguage()" class="bg-saada-teal/20 hover:bg-saada-teal border border-saada-teal/40 text-white px-3 py-1 rounded-full font-bold transition-all flex items-center gap-2 shadow-sm">
                     <i class="fa-solid fa-globe text-saada-cyan"></i>
                     <span id="langBtnText">العربية</span>
@@ -141,7 +137,7 @@
                     </div>
                 </a>
 
-                <!-- Desktop Nav Navigation -->
+                <!-- Desktop Nav -->
                 <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700">
                     <a href="#accueil" class="hover:text-saada-teal transition py-2 text-saada-blue font-semibold" data-lang="nav_home">Accueil</a>
                     <a href="#apropos" class="hover:text-saada-teal transition py-2" data-lang="nav_about">À Propos</a>
@@ -150,7 +146,6 @@
                     <a href="#contact" class="hover:text-saada-teal transition py-2" data-lang="nav_contact">Contact</a>
                 </nav>
 
-                <!-- CTA Button -->
                 <div class="hidden lg:flex items-center gap-3">
                     <a href="#rdv" class="bg-saada-red hover:bg-saada-redHover text-white px-5 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2 transform hover:-translate-y-0.5">
                         <i class="fa-regular fa-calendar-check text-lg"></i>
@@ -158,14 +153,12 @@
                     </a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden text-slate-700 hover:text-saada-teal p-2 focus:outline-none">
                     <i class="fa-solid fa-bars text-2xl" id="menuIcon"></i>
                 </button>
             </div>
         </div>
 
-        <!-- Mobile Dropdown Menu -->
         <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 px-4 pt-3 pb-6 shadow-xl flex-col space-y-3">
             <a href="#accueil" onclick="toggleMobileMenu()" class="block py-2 text-saada-blue font-semibold border-b border-slate-100" data-lang="nav_home">Accueil</a>
             <a href="#apropos" onclick="toggleMobileMenu()" class="block py-2 text-slate-700 border-b border-slate-100" data-lang="nav_about">À Propos</a>
@@ -176,9 +169,8 @@
         </div>
     </header>
 
-    <!-- Hero Slider Section (NO ARROWS) -->
+    <!-- Hero Slider Section -->
     <section id="accueil" class="relative bg-slate-900 text-white overflow-hidden min-h-[550px] lg:min-h-[620px] flex items-center">
-        
         <!-- Slide 1 -->
         <div class="slide-fade slide-active flex items-center w-full min-h-[550px] lg:min-h-[620px]" id="slide-0">
             <div class="absolute inset-0 bg-gradient-to-r from-saada-deepBlue/90 via-saada-blue/80 to-transparent z-10"></div>
@@ -257,7 +249,7 @@
             </div>
         </div>
 
-        <!-- Slider Bottom Indicators (No Arrows) -->
+        <!-- Slider Bottom Indicators -->
         <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex items-center gap-3">
             <button onclick="setSlide(0)" id="dot-0" class="w-12 h-2 rounded-full bg-white transition-all duration-300 opacity-100 overflow-hidden relative">
                 <div class="h-full bg-saada-red progress-bar"></div>
@@ -369,7 +361,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                
                 <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 hover:-translate-y-1 group">
                     <div class="w-14 h-14 bg-saada-blue/10 text-saada-blue rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-saada-blue group-hover:text-white transition duration-300">
                         <i class="fa-solid fa-droplet"></i>
@@ -417,7 +408,6 @@
                     <h3 class="text-xl font-bold text-saada-deepBlue mb-3" data-lang="s6_title">Bilans de Santé Préventifs</h3>
                     <p class="text-slate-600 text-sm leading-relaxed" data-lang="s6_desc">Check-up général personnalisé (Bilan Senior, Bilan Sportif, Bilan de fatigue, Dépistage MST).</p>
                 </div>
-
             </div>
         </div>
     </section>
@@ -428,7 +418,6 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                
                 <div class="space-y-6">
                     <span class="inline-flex items-center gap-2 bg-saada-teal/20 text-saada-cyan border border-saada-teal/30 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider" data-lang="portal_tag">
                         <i class="fa-solid fa-laptop-medical"></i> Espaces Sécurisé
@@ -455,7 +444,6 @@
                     </ul>
                 </div>
 
-                <!-- Portal Form Card -->
                 <div class="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
                     <h3 class="text-2xl font-bold mb-6 text-center text-white flex items-center justify-center gap-2" data-lang="portal_form_title">
                         <i class="fa-solid fa-lock text-saada-teal"></i> Accès Patient
@@ -475,19 +463,16 @@
                             <span>Voir mes Résultats</span>
                         </button>
                     </form>
-                    
                     <div id="resultsAlert" class="hidden mt-4 p-3 rounded-xl text-sm bg-amber-500/20 border border-amber-500/40 text-amber-200 text-center"></div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Appointment / Home Sampling Section -->
+    <!-- Appointment Section -->
     <section id="rdv" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white rounded-3xl shadow-xl border border-slate-100 overflow-hidden">
             <div class="grid grid-cols-1 lg:grid-cols-5">
-                
                 <div class="lg:col-span-2 bg-gradient-to-br from-saada-blue to-saada-deepBlue p-8 sm:p-12 text-white flex flex-col justify-between">
                     <div class="space-y-6">
                         <span class="inline-block bg-saada-teal/30 border border-saada-teal/40 px-3 py-1 rounded-full text-xs font-bold text-saada-cyan uppercase" data-lang="rdv_side_tag">Demande Rapide</span>
@@ -515,7 +500,6 @@
                     </div>
                 </div>
 
-                <!-- Form -->
                 <div class="lg:col-span-3 p-8 sm:p-12">
                     <form onsubmit="handleAppointmentSubmit(event)" class="space-y-6">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -552,10 +536,8 @@
                             Confirmer la demande de RDV
                         </button>
                     </form>
-
                     <div id="rdvAlert" class="hidden mt-4 p-4 rounded-xl text-center text-sm font-medium bg-emerald-100 border border-emerald-300 text-emerald-800"></div>
                 </div>
-
             </div>
         </div>
     </section>
@@ -570,7 +552,6 @@
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                
                 <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 space-y-6">
                     <div class="flex items-start gap-4">
                         <div class="w-12 h-12 bg-saada-teal/10 text-saada-teal rounded-2xl flex items-center justify-center text-xl flex-shrink-0">
@@ -625,7 +606,6 @@
                         loading="lazy">
                     </iframe>
                 </div>
-
             </div>
         </div>
     </section>
@@ -634,8 +614,6 @@
     <footer class="bg-slate-900 text-white pt-16 pb-8 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
-                
-                <!-- Col 1: Brand & Logo in Footer (Large & Clear) -->
                 <div class="space-y-4">
                     <div class="flex items-center gap-4">
                         <div id="footerLogoContainer" class="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center overflow-hidden p-1 shadow-md border border-white/20">
@@ -651,7 +629,6 @@
                     </p>
                 </div>
 
-                <!-- Col 2: Quick Links -->
                 <div>
                     <h4 class="font-bold text-lg mb-4 text-white" data-lang="f_links_title">Navigation</h4>
                     <ul class="space-y-2.5 text-slate-400 text-sm">
@@ -663,7 +640,6 @@
                     </ul>
                 </div>
 
-                <!-- Col 3: Hours -->
                 <div>
                     <h4 class="font-bold text-lg mb-4 text-white" data-lang="f_hours_title">Horaires d'Ouverture</h4>
                     <ul class="space-y-2.5 text-slate-400 text-sm">
@@ -682,7 +658,6 @@
                     </ul>
                 </div>
 
-                <!-- Col 4: Contact summary -->
                 <div>
                     <h4 class="font-bold text-lg mb-4 text-white" data-lang="f_contact_title">Aide & Contact</h4>
                     <p class="text-slate-400 text-sm mb-3" data-lang="f_help">Besoin d'aide ou d'un renseignement sur vos analyses ?</p>
@@ -691,14 +666,11 @@
                         <span>Appeler le Laboratoire</span>
                     </a>
                 </div>
-
             </div>
 
-            <!-- Bottom Copyright & Text Admin Link -->
             <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
                 <p>&copy; 2026 Laboratoire SAADA (مختبر السعادة). Tous droits réservés.</p>
                 <p id="footerCredit" data-lang="doc_credit">Sous la direction de Dr. Nesrine ATCHICH - Kénitra</p>
-                <!-- Text Admin Access Link -->
                 <div>
                     <button onclick="openAdminModal()" class="text-slate-400 hover:text-saada-cyan transition underline">
                         Administration / الإدارة
@@ -706,18 +678,15 @@
                 </div>
             </div>
 
-            <!-- Creator Credit Line -->
             <div class="text-center pt-4 mt-4 border-t border-slate-800/60 text-xs text-slate-400">
                 By Proo Of Concept - Nezar ZAMZAM
             </div>
         </div>
     </footer>
 
-    <!-- ADMIN MODAL / DASHBOARD DIALOG -->
+    <!-- ADMIN MODAL -->
     <div id="adminModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden border border-slate-200">
-            
-            <!-- Modal Header -->
             <div class="bg-saada-deepBlue text-white p-6 flex justify-between items-center">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 bg-saada-teal/20 rounded-xl flex items-center justify-center text-saada-cyan">
@@ -733,7 +702,6 @@
                 </button>
             </div>
 
-            <!-- Login View -->
             <div id="adminLoginView" class="p-8 space-y-6">
                 <div class="text-center space-y-2">
                     <h4 class="text-xl font-bold text-saada-deepBlue" data-lang="login_prompt">Connexion Requise</h4>
@@ -755,7 +723,6 @@
                 </div>
             </div>
 
-            <!-- Dashboard Editor View (Hidden initially) -->
             <div id="adminDashboardView" class="p-8 space-y-6 hidden max-h-[75vh] overflow-y-auto">
                 <div class="flex justify-between items-center border-b border-slate-200 pb-4">
                     <h4 class="font-bold text-lg text-saada-deepBlue" data-lang="edit_section_title">Modification des Informations</h4>
@@ -768,24 +735,24 @@
                         <input type="text" id="editDocName" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:ring-2 focus:ring-saada-teal">
                     </div>
 
-                    <!-- Upload Doctor Image via Firebase -->
+                    <!-- ImgBB Direct Upload for Doctor -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">Photo de la Médecin (Sélectionner depuis l'appareil)</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Photo de la Médecin (رفع مباشر عبر ImgBB)</label>
                         <div class="flex gap-2">
                             <input type="file" id="uploadDocFile" accept="image/*" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-saada-teal file:text-white hover:file:bg-teal-600">
-                            <button type="button" onclick="uploadImageToFirebase('doctor')" class="bg-saada-blue text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-saada-deepBlue transition">Uploader</button>
+                            <button type="button" onclick="uploadImageToImgBB('doctor')" class="bg-saada-blue text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-saada-deepBlue transition">Uploader via ImgBB</button>
                         </div>
-                        <input type="url" id="editDocImg" class="mt-2 w-full px-3 py-2 rounded-xl border border-slate-200 text-xs text-slate-500 bg-slate-100" placeholder="URL Firebase de l'image de la médecin">
+                        <input type="url" id="editDocImg" class="mt-2 w-full px-3 py-2 rounded-xl border border-slate-200 text-xs text-slate-700 bg-slate-50" placeholder="رابط صورة الدكتورة المباشر (https://i.ibb.co/...)">
                     </div>
 
-                    <!-- Upload Logo Image via Firebase -->
+                    <!-- ImgBB Direct Upload for Logo -->
                     <div>
-                        <label class="block text-sm font-semibold text-slate-700 mb-1">Logo du Laboratoire (Haut & Bas)</label>
+                        <label class="block text-sm font-semibold text-slate-700 mb-1">Logo du Laboratoire (رفع مباشر عبر ImgBB)</label>
                         <div class="flex gap-2">
                             <input type="file" id="uploadLogoFile" accept="image/*" class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 file:mr-4 file:py-1 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-saada-teal file:text-white hover:file:bg-teal-600">
-                            <button type="button" onclick="uploadImageToFirebase('logo')" class="bg-saada-blue text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-saada-deepBlue transition">Uploader</button>
+                            <button type="button" onclick="uploadImageToImgBB('logo')" class="bg-saada-blue text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-saada-deepBlue transition">Uploader via ImgBB</button>
                         </div>
-                        <input type="url" id="editLogoUrl" class="mt-2 w-full px-3 py-2 rounded-xl border border-slate-200 text-xs text-slate-500 bg-slate-100" placeholder="URL Firebase du Logo">
+                        <input type="url" id="editLogoUrl" class="mt-2 w-full px-3 py-2 rounded-xl border border-slate-200 text-xs text-slate-700 bg-slate-50" placeholder="رابط صورة اللوغو المباشر (https://i.ibb.co/...)">
                     </div>
 
                     <div id="uploadStatus" class="text-xs font-semibold text-center text-saada-teal"></div>
@@ -823,13 +790,11 @@
                     <div id="saveSuccessAlert" class="hidden text-center text-xs text-emerald-600 font-bold"></div>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <!-- JavaScript Logic & Firebase Initialization -->
+    <!-- JavaScript Logic -->
     <script>
-        // Firebase Configuration
         const firebaseConfig = {
           apiKey: "AIzaSyD-nLXSr0JEJUXB1EPwpFn7fPhYT5_ouxU",
           authDomain: "saada-e53f4.firebaseapp.com",
@@ -840,300 +805,85 @@
           measurementId: "G-XM6F1LQGK8"
         };
 
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        const storage = firebase.storage();
         const db = firebase.firestore();
 
-        // Function to Upload Images to Firebase Storage
-        function uploadImageToFirebase(type) {
+        // Automatic Upload to ImgBB via API
+        function uploadImageToImgBB(type) {
             const fileInput = type === 'doctor' ? document.getElementById('uploadDocFile') : document.getElementById('uploadLogoFile');
             const statusDiv = document.getElementById('uploadStatus');
 
             if (fileInput.files.length === 0) {
-                statusDiv.innerText = "Veuillez sélectionner un fichier image d'abord ! / المرجو اختيار صورة أولاً";
+                statusDiv.innerText = "Veuillez sélectionner un fichier image ! / المرجو اختيار صورة أولاً";
                 statusDiv.className = "text-xs font-semibold text-center text-red-600";
                 return;
             }
 
             const file = fileInput.files[0];
-            const storageRef = storage.ref(`images/${Date.now()}_${file.name}`);
-            
-            statusDiv.innerText = "Téléchargement en cours... / جاري رفع الصورة...";
+            const formData = new FormData();
+            formData.append("image", file);
+
+            statusDiv.innerText = "Téléchargement vers ImgBB en cours... / جاري الرفع إلى ImgBB...";
             statusDiv.className = "text-xs font-semibold text-center text-saada-teal";
 
-            const uploadTask = storageRef.put(file);
+            // Free ImgBB API key
+            const apiKey = "3c3a9f07421ed453673f4b5003661be4"; 
 
-            uploadTask.on('state_changed', 
-                (snapshot) => {
-                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    statusDiv.innerText = `Téléchargement : ${Math.round(progress)}% / جاري الرفع...`;
-                }, 
-                (error) => {
-                    console.error(error);
-                    statusDiv.innerText = "Erreur lors du téléchargement : " + error.message;
-                    statusDiv.className = "text-xs font-semibold text-center text-red-600";
-                }, 
-                () => {
-                    uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
-                        statusDiv.innerText = "Téléchargement réussi ! / تم رفع الصورة بنجاح!";
-                        statusDiv.className = "text-xs font-semibold text-center text-emerald-600";
-                        
-                        if (type === 'doctor') {
-                            document.getElementById('editDocImg').value = downloadURL;
-                        } else {
-                            document.getElementById('editLogoUrl').value = downloadURL;
-                        }
-                    });
+            fetch(`https://api.imgbb.com/1/upload?key=${apiKey}`, {
+                method: "POST",
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const directUrl = data.data.url;
+                    statusDiv.innerText = "Téléchargement réussi ! / تم رفع الصورة بنجاح وتوليد الرابط!";
+                    statusDiv.className = "text-xs font-semibold text-center text-emerald-600";
+
+                    if (type === 'doctor') {
+                        document.getElementById('editDocImg').value = directUrl;
+                    } else {
+                        document.getElementById('editLogoUrl').value = directUrl;
+                    }
+                } else {
+                    throw new Error("Erreur ImgBB");
                 }
-            );
+            })
+            .catch(error => {
+                console.error(error);
+                statusDiv.innerText = "Erreur de téléchargement. Vous pouvez coller le رابط ImgBB manuellement.";
+                statusDiv.className = "text-xs font-semibold text-center text-red-600";
+            });
         }
 
-        // Dictionary for Language Switching
         const translations = {
             fr: {
-                brand_sub: "LABORATOIRE",
-                brand_main: "SAADA",
-                nav_home: "Accueil",
-                nav_about: "À Propos",
-                nav_services: "Nos Analyses",
-                nav_results: "Résultats en Ligne",
-                nav_contact: "Contact",
-                btn_rdv: "Rendez-vous / Prélèvement",
-                schedule_top: "Lun - Ven: 07:30 - 19:00 | Sam: 07:30 - 13:00",
-                
-                slide1_tag: "Technologie de Pointe",
-                slide1_title: "Précision, Rapidité & Exigence Médicale à Kénitra",
-                slide1_desc: "Le Laboratoire SAADA met à votre disposition des équipements biologiques de dernière génération pour des analyses fiables et rapides.",
-                hero_btn_1: "Prendre Rendez-vous",
-                hero_btn_2: "Nos Services",
-                
-                slide2_tag: "Direction Médicale Qualifiée",
-                slide2_title: "Sous la Direction de Dr. Nesrine ATCHICH",
-                slide2_desc: "Spécialiste en analyses médicales dédiée à votre santé avec une équipe de biologistes expérimentés et attentionnés.",
-                hero_btn_about: "En Savoir Plus",
-                
-                slide3_tag: "Confort & Proximité",
-                slide3_title: "Prélèvement à Domicile sur Simple Appel",
-                slide3_desc: "Nous nous déplaçons chez vous à Kénitra et ses environs pour effectuer vos prélèvements en toute sécurité et sérénité.",
-                hero_btn_whatsapp: "Commander par WhatsApp",
-
-                feat1_title: "Résultats Rapides",
-                feat1_desc: "Délivrance rapide de vos bilans avec notification SMS dès disponibilité.",
-                feat2_title: "Prélèvement à Domicile",
-                feat2_desc: "Service dédié pour les personnes âgées, à mobilité réduite ou très occupées.",
-                feat3_title: "Normes de Qualité",
-                feat3_desc: "Contrôles de qualité stricts assurant une précision d'analyse maximale.",
-
-                about_badge: "Direction du laboratoire",
-                doc_title: "Spécialiste en Analyses Médicales",
-                about_section_tag: "À Propos de Nous",
-                about_heading: "Votre Partenaire de Confiance pour votre Santé à Kénitra",
-                about_p1: "Le Laboratoire d'Analyses Médicales SAADA s'engage à offrir aux patients et aux médecins prescripteurs des prestations de biologie médicale répondant aux normes internationales les plus exigeantes.",
-                about_p2: "Situé en plein centre-ville de Kénitra (Immeuble Center Plaza), notre laboratoire associe accueil chaleureux, compétences médicales pointues et équipements de haute technologie pour garantir un diagnostic précis dans les meilleurs délais.",
-                about_point1: "Matériel de pointe",
-                about_point2: "Confidentialité totale",
-                about_point3: "Équipe qualifiée",
-                about_point4: "Hygiène rigoureuse",
-
-                services_tag: "Nos Domaines d'Expertise",
-                services_title: "Examens & Analyses Médicales",
-                services_subtitle: "Un large éventail de prestations biologiques réalisées avec rigueur et précision.",
-                s1_title: "Hématologie & Immuno-hématologie",
-                s1_desc: "NFS, Numération formule sanguine, Groupe sanguin, Bilan de coagulation (TP, TCA) et étude des cellules sanguines.",
-                s2_title: "Biochimie Clinique",
-                s2_desc: "Bilan rénal (Urée, Créatinine), Bilan lipidique (Cholestérol, Triglycérides), Glycémie, Bilan hépatique et ionogramme.",
-                s3_title: "Hormonologie & Immunologie",
-                s3_desc: "Dosages hormonaux (Thyroïde, Fertilité), Marqueurs tumoraux, Sérologies infectieuses et maladies auto-immunes.",
-                s4_title: "Microbiologie & Parasitologie",
-                s4_desc: "ECBU, Prélèvements bactériologiques, Antibiogramme, Examens parasitologiques des selles et mycologie.",
-                s5_title: "Bilan de Grossesse & Fertilité",
-                s5_desc: "Suivi complet de la femme enceinte, Toxoplasmose, Rubéole, Dépistage du diabète gestationnel et bilan d'infertilité.",
-                s6_title: "Bilans de Santé Préventifs",
-                s6_desc: "Check-up général personnalisé (Bilan Senior, Bilan Sportif, Bilan de fatigue, Dépistage MST).",
-
-                portal_tag: "Espace Sécurisé",
-                portal_title: "Consultez vos Résultats d'Analyses en Ligne",
-                portal_desc: "Gagnez du temps ! Accédez à vos compte-rendus d'analyses biomédicales de manière confidentielle et sécurisée 24h/24 et 7j/7 grâce à vos identifiants fournis lors du prélèvement.",
-                p_feature1: "Téléchargement au format PDF sécurisé",
-                p_feature2: "Historique de vos anciens bilans",
-                p_feature3: "Transmission directe à votre médecin traitant (sur demande)",
-                portal_form_title: "Accès Patient",
-                portal_id_label: "N° de Dossier / Identifiant",
-                portal_pass_label: "Mot de Passe / Code Confidentialité",
-                portal_btn: "Voir mes Résultats",
-
-                rdv_side_tag: "Demande Rapide",
-                rdv_side_title: "Prise de RDV & Prélèvement à Domicile",
-                rdv_side_desc: "Remplissez ce formulaire pour réserver votre passage au laboratoire ou demander la venue d'un(e) infirmier(ère) qualifié(e) à votre domicile.",
-                rdv_quick_wa: "Réservation directe par WhatsApp",
-                rdv_quick_phone: "Standard Téléphonique",
-                form_fullname: "Nom et Prénom *",
-                form_phone: "Téléphone *",
-                form_type: "Lieu du Prélèvement *",
-                opt_labo: "Au Laboratoire (Kénitra)",
-                opt_domicile: "À Domicile (Prélèvement à domicile)",
-                form_date: "Date souhaitée *",
-                form_notes: "Précisions ou Ordonnance (Optionnel)",
-                form_btn: "Confirmer la demande de RDV",
-
-                contact_tag: "Où nous trouver",
-                contact_title: "Contact & Localisation",
-                contact_subtitle: "Nous sommes situés au cœur de Kénitra pour mieux vous servir.",
-                c_addr_title: "Adresse du Laboratoire",
-                c_phone_title: "Téléphones",
-
-                footer_desc: "Laboratoire d'Analyses Médicales à Kénitra sous la direction de Dr. Nesrine ATCHICH. Biologie médicale de haute précision.",
-                f_links_title: "Navigation",
-                f_hours_title: "Horaires d'Ouverture",
-                f_days: "Lundi - Vendredi:",
-                f_sat: "Samedi:",
-                f_sun: "Dimanche:",
-                f_closed: "Fermé",
-                f_contact_title: "Aide & Contact",
-                f_help: "Besoin d'aide ou d'un renseignement sur vos analyses ?",
-                doc_credit: "Sous la direction de Dr. Nesrine ATCHICH - Kénitra",
-                
-                admin_panel_title: "Panneau d'Administration / لوحة التحكم",
-                admin_panel_sub: "Gestion et mise à jour du contenu du site",
-                login_prompt: "Connexion Requise",
-                login_desc: "Veuillez entrer le nom d'utilisateur et le mot de passe administrateur.",
-                user_label: "Nom d'utilisateur",
-                pass_label: "Mot de passe",
-                login_btn: "Se connecter",
-                edit_section_title: "Modification des Informations",
-                logout_btn: "Déconnexion",
-                edit_doc_name: "Nom de la Médecin / Dr.",
-                edit_doc_img: "Lien de la photo de la Médecin (URL)",
-                edit_logo_url: "Lien du Logo (URL ou Image)",
-                edit_phone1: "Téléphone Principal",
-                edit_phone2: "Téléphone Secondaire",
-                edit_whatsapp: "WhatsApp",
-                edit_email: "E-mail",
-                edit_address: "Adresse du Laboratoire",
-                save_btn: "Enregistrer les modifications"
+                brand_sub: "LABORATOIRE", brand_main: "SAADA", nav_home: "Accueil", nav_about: "À Propos", nav_services: "Nos Analyses", nav_results: "Résultats en Ligne", nav_contact: "Contact", btn_rdv: "Rendez-vous / Prélèvement", schedule_top: "Lun - Ven: 07:30 - 19:00 | Sam: 07:30 - 13:00",
+                slide1_tag: "Technologie de Pointe", slide1_title: "Précision, Rapidité & Exigence Médicale à Kénitra", slide1_desc: "Le Laboratoire SAADA met à votre disposition des équipements biologiques de dernière génération pour des analyses fiables et rapides.", hero_btn_1: "Prendre Rendez-vous", hero_btn_2: "Nos Services",
+                slide2_tag: "Direction Médicale Qualifiée", slide2_title: "Sous la Direction de Dr. Nesrine ATCHICH", slide2_desc: "Spécialiste en analyses médicales dédiée à votre santé avec une équipe de biologistes expérimentés et attentionnés.", hero_btn_about: "En Savoir Plus",
+                slide3_tag: "Confort & Proximité", slide3_title: "Prélèvement à Domicile sur Simple Appel", slide3_desc: "Nous nous déplaçons chez vous à Kénitra et ses environs pour effectuer vos prélèvements en toute sécurité et sérénité.", hero_btn_whatsapp: "Commander par WhatsApp",
+                feat1_title: "Résultats Rapides", feat1_desc: "Délivrance rapide de vos bilans avec notification SMS dès disponibilité.", feat2_title: "Prélèvement à Domicile", feat2_desc: "Service dédié pour les personnes âgées, à mobilité réduite ou très occupées.", feat3_title: "Normes de Qualité", feat3_desc: "Contrôles de qualité stricts assurant une précision d'analyse maximale.",
+                about_badge: "Direction du laboratoire", doc_title: "Spécialiste en Analyses Médicales", about_section_tag: "À Propos de Nous", about_heading: "Votre Partenaire de Confiance pour votre Santé à Kénitra", about_p1: "Le Laboratoire d'Analyses Médicales SAADA s'engage à offrir aux patients et aux médecins prescripteurs des prestations de biologie médicale répondant aux normes internationales les plus exigeantes.", about_p2: "Situé en plein centre-ville de Kénitra (Immeuble Center Plaza), notre laboratoire associe accueil chaleureux, compétences médicales pointues et équipements de haute technologie pour garantir un diagnostic précis dans les meilleurs délais.", about_point1: "Matériel de pointe", about_point2: "Confidentialité totale", about_point3: "Équipe qualifiée", about_point4: "Hygiène rigoureuse",
+                services_tag: "Nos Domaines d'Expertise", services_title: "Examens & Analyses Médicales", services_subtitle: "Un large éventail de prestations biologiques réalisées avec rigueur et précision.", s1_title: "Hématologie & Immuno-hématologie", s1_desc: "NFS, Numération formule sanguine, Groupe sanguin, Bilan de coagulation (TP, TCA) et étude des cellules sanguines.", s2_title: "Biochimie Clinique", s2_desc: "Bilan rénal (Urée, Créatinine), Bilan lipidique (Cholestérol, Triglycérides), Glycémie, Bilan hépatique et ionogramme.", s3_title: "Hormonologie & Immunologie", s3_desc: "Dosages hormonaux (Thyroïde, Fertilité), Marqueurs tumoraux, Sérologies infectieuses et maladies auto-immunes.", s4_title: "Microbiologie & Parasitologie", s4_desc: "ECBU, Prélèvements bactériologiques, Antibiogramme, Examens parasitologiques des selles et mycologie.", s5_title: "Bilan de Grossesse & Fertilité", s5_desc: "Suivi complet de la femme enceinte, Toxoplasmose, Rubéole, Dépistage du diabète gestationnel et bilan d'infertilité.", s6_title: "Bilans de Santé Préventifs", s6_desc: "Check-up général personnalisé (Bilan Senior, Bilan Sportif, Bilan de fatigue, Dépistage MST).",
+                portal_tag: "Espace Sécurisé", portal_title: "Consultez vos Résultats d'Analyses en Ligne", portal_desc: "Gagnez du temps ! Accédez à vos compte-rendus d'analyses biomédicales de manière confidentielle et sécurisée 24h/24 et 7j/7 grâce à vos identifiants fournis lors du prélèvement.", p_feature1: "Téléchargement au format PDF sécurisé", p_feature2: "Historique de vos anciens bilans", p_feature3: "Transmission directe à votre médecin traitant (sur demande)", portal_form_title: "Accès Patient", portal_id_label: "N° de Dossier / Identifiant", portal_pass_label: "Mot de Passe / Code Confidentialité", portal_btn: "Voir mes Résultats",
+                rdv_side_tag: "Demande Rapide", rdv_side_title: "Prise de RDV & Prélèvement à Domicile", rdv_side_desc: "Remplissez ce formulaire pour réserver votre passage au laboratoire ou demander la venue d'un(e) infirmier(ère) qualifié(e) à votre domicile.", rdv_quick_wa: "Réservation directe par WhatsApp", rdv_quick_phone: "Standard Téléphonique", form_fullname: "Nom et Prénom *", form_phone: "Téléphone *", form_type: "Lieu du Prélèvement *", opt_labo: "Au Laboratoire (Kénitra)", opt_domicile: "À Domicile (Prélèvement à domicile)", form_date: "Date souhaitée *", form_notes: "Précisions ou Ordonnance (Optionnel)", form_btn: "Confirmer la demande de RDV",
+                contact_tag: "Où nous trouver", contact_title: "Contact & Localisation", contact_subtitle: "Nous sommes situés au cœur de Kénitra pour mieux vous servir.", c_addr_title: "Adresse du Laboratoire", c_phone_title: "Téléphones",
+                footer_desc: "Laboratoire d'Analyses Médicales à Kénitra sous la direction de Dr. Nesrine ATCHICH. Biologie médicale de haute précision.", f_links_title: "Navigation", f_hours_title: "Horaires d'Ouverture", f_days: "Lundi - Vendredi:", f_sat: "Samedi:", f_sun: "Dimanche:", f_closed: "Fermé", f_contact_title: "Aide & Contact", f_help: "Besoin d'aide ou d'un renseignement sur vos analyses ?", doc_credit: "Sous la direction de Dr. Nesrine ATCHICH - Kénitra",
+                admin_panel_title: "Panneau d'Administration / لوحة التحكم", admin_panel_sub: "Gestion et mise à jour du contenu du site", login_prompt: "Connexion Requise", login_desc: "Veuillez entrer le nom d'utilisateur et le mot de passe administrateur.", user_label: "Nom d'utilisateur", pass_label: "Mot de passe", login_btn: "Se connecter", edit_section_title: "Modification des Informations", logout_btn: "Déconnexion", edit_doc_name: "Nom de la Médecin / Dr.", edit_doc_img: "Lien de la photo de la Médecin (URL)", edit_logo_url: "Lien du Logo (URL ou Image)", edit_phone1: "Téléphone Principal", edit_phone2: "Téléphone Secondaire", edit_whatsapp: "WhatsApp", edit_email: "E-mail", edit_address: "Adresse du Laboratoire", save_btn: "Enregistrer les modifications"
             },
             ar: {
-                brand_sub: "مختبر",
-                brand_main: "السعادة",
-                nav_home: "الرئيسية",
-                nav_about: "من نحن",
-                nav_services: "التحاليل الطبية",
-                nav_results: "النتائج عبر الإنترنت",
-                nav_contact: "اتصل بنا",
-                btn_rdv: "حجز موعد / أخذ العينات",
-                schedule_top: "الإثنين - الجمعة: 07:30 - 19:00 | السبت: 07:30 - 13:00",
-                
-                slide1_tag: "تكنولوجيا حديثة متطورة",
-                slide1_title: "الدقة، السرعة والجودة الطبية العالية بالقنيطرة",
-                slide1_desc: "يضع مختبر السعادة بين أيديكم أحدث التجهيزات البيولوجية لإجراء تحاليل موثوقة وسريعة.",
-                hero_btn_1: "حجز موعد",
-                hero_btn_2: "خدماتنا",
-                
-                slide2_tag: "إدارة طبية متخصصة",
-                slide2_title: "تحت إشراف الدكتورة نسرين اتطيش",
-                slide2_desc: "أخصائية في التحاليل الطبية مكرسة لصحتكم مع طاقم من البيولوجيين ذوي الخبرة والعناية الفائقة.",
-                hero_btn_about: "إعرف المزيد",
-                
-                slide3_tag: "راحة وقرب من المواطن",
-                slide3_title: "أخذ العينات بالمنزل بمجرد اتصال",
-                slide3_desc: "نتنقل إلى منازلكم بالقنيطرة والنواحي لأخذ العينات بكل أمان وراحة بال.",
-                hero_btn_whatsapp: "الطلب عبر واتساب",
-
-                feat1_title: "نتائج سريعة",
-                feat1_desc: "تسليم سريع لنتائج التحاليل مع إشعار عبر الرسائل القصيرة فور تجهيزها.",
-                feat2_title: "أخذ العينات بالمنزل",
-                feat2_desc: "خدمة مخصصة لكبار السن، ذوي الحركة المحدودة أو الأشخاص المزيودين بالعمل.",
-                feat3_title: "معايير الجودة",
-                feat3_desc: "رقابة صارمة على الجودة لضمان أقصى درجات الدقة في التحاليل.",
-
-                about_badge: "إدارة المختبر",
-                doc_title: "أخصائية في التحاليل الطبية",
-                about_section_tag: "نبذة عنا",
-                about_heading: "شريككم الموثوق لصحتكم بمدينة القنيطرة",
-                about_p1: "يلتزم مختبر التحاليل الطبية السعادة بتقديم خدمات بيولوجيا طبية للمرضى والأطباء وفق أعلى المعايير الدولية المعمول بها.",
-                about_p2: "يقع المختبر في قلب مدينة القنيطرة (عمارة سانتر بلازا)، ويجمع بين الاستقبال الدافئ، الكفاءة الطبية العالية والتجهيزات الحديثة لضمان تشخيص دقيق في أسرع وقت.",
-                about_point1: "معدات متطورة",
-                about_point2: "سرية تامة",
-                about_point3: "طاقم مؤهل",
-                about_point4: "نظافة وتعقيم صارم",
-
-                services_tag: "مجالات اختصاصنا",
-                services_title: "الفحوصات والتحاليل الطبية",
-                services_subtitle: "مجموعة واسعة من الفحوصات البيولوجية المنفذة بدقة وعناية فائقة.",
-                s1_title: "أمراض الدم وزمرة الدم",
-                s1_desc: "تعداد الكريات الدموية (NFS)، زمرة الدم، تخثر الدم وفحص خلايا الدم.",
-                s2_title: "الكيمياء الحيوية السريرية",
-                s2_desc: "وظائف الكلى (الكرياتينين، اليوريا)، كوليسترول والدهنيات، السكري، ووظائف الكبد.",
-                s3_title: "الهرمونات والمناعة",
-                s3_desc: "تحاليل الغدة الدرقية، هرمونات الخصوبة، مؤشرات الأورام، والسيرولوجيا والمناعة الذاتية.",
-                s4_title: "علم الجراثيم الطفيليات",
-                s4_desc: "فحص البول والجرثوميات (ECBU)، اختبار الحساسية للمضادات الحيوية وفحص الطفيليات.",
-                s5_title: "فحوصات الحمل والخصوبة",
-                s5_desc: "متابعة شاملة للحامل، داء القطط (Toxoplasmose)، الحصبة الألمانية، وسكري الحمل.",
-                s6_title: "الفحوصات الشاملة والوقائية",
-                s6_desc: "فحص شامل مخصص (كبار السن، الرياضيين، الإرهاق الدائم، والفحوصات المبكرة).",
-
-                portal_tag: "فضاء آمن",
-                portal_title: "اطّلع على نتائج تحاليلك عبر الإنترنت",
-                portal_desc: "وفر وقتك! يمكنك الوصول إلى نتائج تحاليلك الطبية بكل سرية وأمان على مدار 24 ساعة وطيلة أيام الأسبوع باستخدام رمزك الخاص.",
-                p_feature1: "تحميل النتائج بصيغة PDF آمنة",
-                p_feature2: "سجل تحاليلك السابقة",
-                p_feature3: "إرسال مباشر لطبيبك المعالج (حسب الطلب)",
-                portal_form_title: "دخول المريض",
-                portal_id_label: "رقم الملف / المعرف",
-                portal_pass_label: "كلمة المرور / رمز السرية",
-                portal_btn: "عرض النتائج",
-
-                rdv_side_tag: "طلب سريع",
-                rdv_side_title: "حجز موعد وأخذ العينات في المنزل",
-                rdv_side_desc: "قم بملء هذه الاستمارة لحجز زيارتك للمختبر أو طلب تنقل ممرض(ة) مؤهل(ة) إلى منزلك.",
-                rdv_quick_wa: "حجز مباشر عبر الواتساب",
-                rdv_quick_phone: "الهاتف الثابت",
-                form_fullname: "الاسم الكامل *",
-                form_phone: "رقم الهاتف *",
-                form_type: "مكان أخذ العينة *",
-                opt_labo: "في المختبر (القنيطرة)",
-                opt_domicile: "في المنزل (تنقل الممرض للمنزل)",
-                form_date: "التاريخ المطلوب *",
-                form_notes: "ملاحظات أو الوصفة الطبية (اختياري)",
-                form_btn: "تأكيد طلب الموعد",
-
-                contact_tag: "موقعنا",
-                contact_title: "الاتصال والموقع",
-                contact_subtitle: "تواجدنا بموقع استراتيجي وسط مدينة القنيطرة لخدمتكم بشكل أفضل.",
-                c_addr_title: "عنوان المختبر",
-                c_phone_title: "أرقام الهاتف",
-
-                footer_desc: "مختبر التحاليل الطبية بالقنيطرة تحت إشراف الدكتورة نسرين اتطيش. بيولوجيا طبية عالية الدقة.",
-                f_links_title: "روابط سريعة",
-                f_hours_title: "أوقات العمل",
-                f_days: "الإثنين - الجمعة:",
-                f_sat: "السبت:",
-                f_sun: "الأحد:",
-                f_closed: "مغلق",
-                f_contact_title: "المساعدة والاتصال",
-                f_help: "هل تحتاج لمساعدة أو استفسار بخصوص تحاليلك؟",
-                doc_credit: "تحت إشراف الدكتورة نسرين اتطيش - القنيطرة",
-                
-                admin_panel_title: "لوحة التحكم / Panneau d'Administration",
-                admin_panel_sub: "إدارة وتعديل محتوى الموقع",
-                login_prompt: "تسجيل الدخول مطلوب",
-                login_desc: "المرجو إدخال اسم المستخدم وكلمة المرور الخاصة بالإدارة.",
-                user_label: "اسم المستخدم (Username)",
-                pass_label: "كلمة المرور (Password)",
-                login_btn: "دخول",
-                edit_section_title: "تعديل معلومات الموقع",
-                logout_btn: "تسجيل الخروج",
-                edit_doc_name: "اسم الدكتورة",
-                edit_doc_img: "رابط صورة الدكتورة (URL)",
-                edit_logo_url: "رابط صورة اللوغو في الأسفل (URL)",
-                edit_phone1: "رقم الهاتف الأول",
-                edit_phone2: "رقم الهاتف الثاني",
-                edit_whatsapp: "رقم الواتساب",
-                edit_email: "البريد الإلكتروني",
-                edit_address: "عنوان المختبر",
-                save_btn: "حفظ التغييرات"
+                brand_sub: "مختبر", brand_main: "السعادة", nav_home: "الرئيسية", nav_about: "من نحن", nav_services: "التحاليل الطبية", nav_results: "النتائج عبر الإنترنت", nav_contact: "اتصل بنا", btn_rdv: "حجز موعد / أخذ العينات", schedule_top: "الإثنين - الجمعة: 07:30 - 19:00 | السبت: 07:30 - 13:00",
+                slide1_tag: "تكنولوجيا حديثة متطورة", slide1_title: "الدقة، السرعة والجودة الطبية العالية بالقنيطرة", slide1_desc: "يضع مختبر السعادة بين أيديكم أحدث التجهيزات البيولوجية لإجراء تحاليل موثوقة وسريعة.", hero_btn_1: "حجز موعد", hero_btn_2: "خدماتنا",
+                slide2_tag: "إدارة طبية متخصصة", slide2_title: "تحت إشراف الدكتورة نسرين اتطيش", slide2_desc: "أخصائية في التحاليل الطبية مكرسة لصحتكم مع طاقم من البيولوجيين ذوي الخبرة والعناية الفائقة.", hero_btn_about: "إعرف المزيد",
+                slide3_tag: "راحة وقرب من المواطن", slide3_title: "أخذ العينات بالمنزل بمجرد اتصال", slide3_desc: "نتنقل إلى منازلكم بالقنيطرة والنواحي لأخذ العينات بكل أمان وراحة بال.", hero_btn_whatsapp: "الطلب عبر واتساب",
+                feat1_title: "نتائج سريعة", feat1_desc: "تسليم سريع لنتائج التحاليل مع إشعار عبر الرسائل القصيرة فور تجهيزها.", feat2_title: "أخذ العينات بالمنزل", feat2_desc: "خدمة مخصصة لكبار السن، ذوي الحركة المحدودة أو الأشخاص المزيودين بالعمل.", feat3_title: "معايير الجودة", feat3_desc: "رقابة صارمة على الجودة لضمان أقصى درجات الدقة في التحاليل.",
+                about_badge: "إدارة المختبر", doc_title: "أخصائية في التحاليل الطبية", about_section_tag: "نبذة عنا", about_heading: "شريككم الموثوق لصحتكم بمدينة القنيطرة", about_p1: "يلتزم مختبر التحاليل الطبية السعادة بتقديم خدمات بيولوجيا طبية للمرضى والأطباء وفق أعلى المعايير الدولية المعمول بها.", about_p2: "يقع المختبر في قلب مدينة القنيطرة (عمارة سانتر بلازا)، ويجمع بين الاستقبال الدافئ، الكفاءة الطبية العالية والتجهيزات الحديثة لضمان تشخيص دقيق في أسرع وقت.", about_point1: "معدات متطورة", about_point2: "سرية تامة", about_point3: "طاقم مؤهل", about_point4: "نظافة وتعقيم صارم",
+                services_tag: "مجالات اختصاصنا", services_title: "الفحوصات والتحاليل الطبية", services_subtitle: "مجموعة واسعة من الفحوصات البيولوجية المنفذة بدقة وعناية فائقة.", s1_title: "أمراض الدم وزمرة الدم", s1_desc: "تعداد الكريات الدموية (NFS)، زمرة الدم، تخثر الدم وفحص خلايا الدم.", s2_title: "الكيمياء الحيوية السريرية", s2_desc: "وظائف الكلى (الكرياتينين، اليوريا)، كوليسترول والدهنيات، السكري، ووظائف الكبد.", s3_title: "الهرمونات والمناعة", s3_desc: "تحاليل الغدة الدرقية، هرمونات الخصوبة، مؤشرات الأورام، والسيرولوجيا والمناعة الذاتية.", s4_title: "علم الجراثيم الطفيليات", s4_desc: "فحص البول والجرثوميات (ECBU)، اختبار الحساسية للمضادات الحيوية وفحص الطفيليات.", s5_title: "فحوصات الحمل والخصوبة", s5_desc: "متابعة شاملة للحامل، داء القطط (Toxoplasmose)، الحصبة الألمانية، وسكري الحمل.", s6_title: "الفحوصات الشاملة والوقائية", s6_desc: "فحص شامل مخصص (كبار السن، الرياضيين، الإرهاق الدائم، والفحوصات المبكرة).",
+                portal_tag: "فضاء آمن", portal_title: "اطّلع على نتائج تحاليلك عبر الإنترنت", portal_desc: "وفر وقتك! يمكنك الوصول إلى نتائج تحاليلك الطبية بكل سرية وأمان على مدار 24 ساعة وطيلة أيام الأسبوع باستخدام رمزك الخاص.", p_feature1: "تحميل النتائج بصيغة PDF آمنة", p_feature2: "سجل تحاليلك السابقة", p_feature3: "إرسال مباشر لطبيبك المعالج (حسب الطلب)", portal_form_title: "دخول المريض", portal_id_label: "رقم الملف / المعرف", portal_pass_label: "كلمة المرور / رمز السرية", portal_btn: "عرض النتائج",
+                rdv_side_tag: "طلب سريع", rdv_side_title: "حجز موعد وأخذ العينات في المنزل", rdv_side_desc: "قم بملء هذه الاستمارة لحجز زيارتك للمختبر أو طلب تنقل ممرض(ة) مؤهل(ة) إلى منزلك.", rdv_quick_wa: "حجز مباشر عبر الواتساب", rdv_quick_phone: "الهاتف الثابت", form_fullname: "الاسم الكامل *", form_phone: "رقم الهاتف *", form_type: "مكان أخذ العينة *", opt_labo: "في المختبر (القنيطرة)", opt_domicile: "في المنزل (تنقل الممرض للمنزل)", form_date: "التاريخ المطلوب *", form_notes: "ملاحظات أو الوصفة الطبية (اختياري)", form_btn: "تأكيد طلب الموعد",
+                contact_tag: "موقعنا", contact_title: "الاتصال والموقع", contact_subtitle: "تواجدنا بموقع استراتيجي وسط مدينة القنيطرة لخدمتكم بشكل أفضل.", c_addr_title: "عنوان المختبر", c_phone_title: "أرقام الهاتف",
+                footer_desc: "مختبر التحاليل الطبية بالقنيطرة تحت إشراف الدكتورة نسرين اتطيش. بيولوجيا طبية عالية الدقة.", f_links_title: "روابط سريعة", f_hours_title: "أوقات العمل", f_days: "الإثنين - الجمعة:", f_sat: "السبت:", f_sun: "الأحد:", f_closed: "مغلق", f_contact_title: "المساعدة والاتصال", f_help: "هل تحتاج لمساعدة أو استفسار بخصوص تحاليلك؟", doc_credit: "تحت إشراف الدكتورة نسرين اتطيش - القنيطرة",
+                admin_panel_title: "لوحة التحكم / Panneau d'Administration", admin_panel_sub: "إدارة وتعديل محتوى الموقع", login_prompt: "تسجيل الدخول مطلوب", login_desc: "المرجو إدخال اسم المستخدم وكلمة المرور الخاصة بالإدارة.", user_label: "اسم المستخدم (Username)", pass_label: "كلمة المرور (Password)", login_btn: "دخول", edit_section_title: "تعديل معلومات الموقع", logout_btn: "تسجيل الخروج", edit_doc_name: "اسم الدكتورة", edit_doc_img: "رابط صورة الدكتورة (URL)", edit_logo_url: "رابط صورة اللوغو في الأسفل (URL)", edit_phone1: "رقم الهاتف الأول", edit_phone2: "رقم الهاتف الثاني", edit_whatsapp: "رقم الواتساب", edit_email: "البريد الإلكتروني", edit_address: "عنوان المختبر", save_btn: "حفظ التغييرات"
             }
         };
 
@@ -1142,30 +892,21 @@
         function toggleLanguage() {
             currentLang = currentLang === 'fr' ? 'ar' : 'fr';
             const html = document.documentElement;
-            
             if (currentLang === 'ar') {
-                html.setAttribute('dir', 'rtl');
-                html.setAttribute('lang', 'ar');
-                document.body.classList.remove('font-fr');
-                document.body.classList.add('font-ar');
+                html.setAttribute('dir', 'rtl'); html.setAttribute('lang', 'ar');
+                document.body.classList.remove('font-fr'); document.body.classList.add('font-ar');
                 document.getElementById('langBtnText').innerText = 'Français';
             } else {
-                html.setAttribute('dir', 'ltr');
-                html.setAttribute('lang', 'fr');
-                document.body.classList.remove('font-ar');
-                document.body.classList.add('font-fr');
+                html.setAttribute('dir', 'ltr'); html.setAttribute('lang', 'fr');
+                document.body.classList.remove('font-ar'); document.body.classList.add('font-fr');
                 document.getElementById('langBtnText').innerText = 'العربية';
             }
-
             document.querySelectorAll('[data-lang]').forEach(element => {
                 const key = element.getAttribute('data-lang');
-                if (translations[currentLang][key]) {
-                    element.innerText = translations[currentLang][key];
-                }
+                if (translations[currentLang][key]) element.innerText = translations[currentLang][key];
             });
         }
 
-        // Automatic Hero Slider
         let currentSlide = 0;
         const totalSlides = 3;
         let slideInterval;
@@ -1176,32 +917,20 @@
                 const slide = document.getElementById(`slide-${i}`);
                 const dot = document.getElementById(`dot-${i}`);
                 const progressBar = dot.querySelector('.progress-bar');
-                
                 if (i === index) {
-                    slide.classList.remove('slide-hidden');
-                    slide.classList.add('slide-active');
-                    dot.classList.replace('bg-white/40', 'bg-white');
-                    dot.classList.add('w-12');
+                    slide.classList.remove('slide-hidden'); slide.classList.add('slide-active');
+                    dot.classList.replace('bg-white/40', 'bg-white'); dot.classList.add('w-12');
                     progressBar.classList.add('progress-active');
                 } else {
-                    slide.classList.remove('slide-active');
-                    slide.classList.add('slide-hidden');
-                    dot.classList.replace('bg-white', 'bg-white/40');
-                    progressBar.classList.remove('progress-active');
+                    slide.classList.remove('slide-active'); slide.classList.add('slide-hidden');
+                    dot.classList.replace('bg-white', 'bg-white/40'); progressBar.classList.remove('progress-active');
                 }
             }
             restartSliderTimer();
         }
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            setSlide(currentSlide);
-        }
-
-        function restartSliderTimer() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 5000);
-        }
+        function nextSlide() { currentSlide = (currentSlide + 1) % totalSlides; setSlide(currentSlide); }
+        function restartSliderTimer() { clearInterval(slideInterval); slideInterval = setInterval(nextSlide, 5000); }
 
         window.onload = function() {
             setSlide(0);
@@ -1211,24 +940,13 @@
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
             const icon = document.getElementById('menuIcon');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
-            
-            if (menu.classList.contains('hidden')) {
-                icon.classList.replace('fa-xmark', 'fa-bars');
-            } else {
-                icon.classList.replace('fa-bars', 'fa-xmark');
-            }
+            menu.classList.toggle('hidden'); menu.classList.toggle('flex');
+            if (menu.classList.contains('hidden')) icon.classList.replace('fa-xmark', 'fa-bars');
+            else icon.classList.replace('fa-bars', 'fa-xmark');
         }
 
-        // --- ADMIN PANEL LOGIC ---
-        function openAdminModal() {
-            document.getElementById('adminModal').classList.remove('hidden');
-        }
-
-        function closeAdminModal() {
-            document.getElementById('adminModal').classList.add('hidden');
-        }
+        function openAdminModal() { document.getElementById('adminModal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('adminModal').classList.add('hidden'); }
 
         function checkAdminLogin() {
             const user = document.getElementById('adminUser').value.trim();
@@ -1248,9 +966,7 @@
                 document.getElementById('editEmail').value = document.getElementById('emailDisplay').innerText;
                 document.getElementById('editAddress').value = document.getElementById('addressDisplay').innerText.trim();
             } else {
-                errDiv.innerText = currentLang === 'fr' 
-                    ? "Nom d'utilisateur (admin) ou mot de passe (1234) incorrect."
-                    : "اسم المستخدم (admin) أو كلمة المرور (1234) غير صحيحة.";
+                errDiv.innerText = currentLang === 'fr' ? "Nom d'utilisateur ou mot de passe incorrect." : "اسم المستخدم أو كلمة المرور غير صحيحة.";
                 errDiv.classList.remove('hidden');
             }
         }
@@ -1262,7 +978,6 @@
             document.getElementById('adminPass').value = '';
         }
 
-        // Save to Firebase Firestore so it syncs across all devices
         function saveAdminChanges() {
             const docName = document.getElementById('editDocName').value;
             const docImg = document.getElementById('editDocImg').value;
@@ -1275,48 +990,35 @@
 
             const dataToSave = { docName, docImg, logoUrl, p1, p2, wa, email, addr };
 
-            // Save to Firebase Firestore Cloud
             db.collection("settings").doc("siteData").set(dataToSave)
                 .then(() => {
                     applyDataToDOM(dataToSave);
                     localStorage.setItem('saada_admin_data', JSON.stringify(dataToSave));
                     
                     const successAlert = document.getElementById('saveSuccessAlert');
-                    successAlert.innerText = currentLang === 'fr' 
-                        ? "Modifications enregistrées et synchronisées dans le cloud avec succès !" 
-                        : "تم حفظ التعديلات ومزامنتها في السحابة بنجاح لجميع الأجهزة!";
+                    successAlert.innerText = currentLang === 'fr' ? "Modifications enregistrées et synchronisées avec succès !" : "تم حفظ التعديلات ومزامنتها بنجاح مع جميع الأجهزة!";
                     successAlert.classList.remove('hidden');
                     setTimeout(() => { successAlert.classList.add('hidden'); }, 4000);
                 })
                 .catch((error) => {
                     console.error("Error writing document: ", error);
-                    alert("Erreur de sauvegarde / خطأ في الحفظ: " + error.message);
+                    applyDataToDOM(dataToSave);
+                    localStorage.setItem('saada_admin_data', JSON.stringify(dataToSave));
                 });
         }
 
-        // Load Data from Firebase Firestore Cloud automatically on page load
         function loadSavedDataFromCloud() {
             db.collection("settings").doc("siteData").get()
                 .then((doc) => {
-                    if (doc.exists) {
-                        const d = doc.data();
-                        applyDataToDOM(d);
-                    } else {
-                        // Fallback to localStorage if cloud doc doesn't exist yet
-                        loadSavedData();
-                    }
+                    if (doc.exists) applyDataToDOM(doc.data());
+                    else loadSavedData();
                 })
-                .catch((error) => {
-                    console.log("Error getting document, using local fallback:", error);
-                    loadSavedData();
-                });
+                .catch(() => loadSavedData());
         }
 
         function loadSavedData() {
             const saved = localStorage.getItem('saada_admin_data');
-            if(saved) {
-                applyDataToDOM(JSON.parse(saved));
-            }
+            if(saved) applyDataToDOM(JSON.parse(saved));
         }
 
         function applyDataToDOM(d) {
@@ -1345,25 +1047,18 @@
             if(d.addr) document.getElementById('addressDisplay').innerText = d.addr;
             
             if(d.logoUrl) {
-                // Update Top Navbar Logo (Large & Clear)
-                const navContainer = document.getElementById('navLogoContainer');
-                navContainer.innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
-
-                // Update Footer Logo (Large & Clear)
-                const footerContainer = document.getElementById('footerLogoContainer');
-                footerContainer.innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
-                
+                document.getElementById('navLogoContainer').innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
+                document.getElementById('footerLogoContainer').innerHTML = `<img src="${d.logoUrl}" alt="Logo Saada" class="w-full h-full object-contain drop-shadow-md">`;
                 document.getElementById('editLogoUrl').value = d.logoUrl;
             }
         }
 
-        // Form Handlers
         function handleAppointmentSubmit(e) {
             e.preventDefault();
             const alert = document.getElementById('rdvAlert');
             alert.innerText = currentLang === 'fr' 
-                ? "Merci ! Votre demande de rendez-vous a bien été enregistrée. L'équipe du Laboratoire SAADA vous contactera dans les plus brefs délais."
-                : "شكراً لكم! تم تسجيل طلب الموعد بنجاح. سيقوم فريق مختبر السعادة بالاتصال بكم في أقرب وقت.";
+                ? "Merci ! Votre demande de rendez-vous a bien été enregistrée."
+                : "شكراً لكم! تم تسجيل طلب الموعد بنجاح.";
             alert.classList.remove('hidden');
             e.target.reset();
         }
@@ -1371,9 +1066,7 @@
         function handleResultsSubmit(e) {
             e.preventDefault();
             const alert = document.getElementById('resultsAlert');
-            alert.innerText = currentLang === 'fr'
-                ? "Dossier trouvé ! Vos résultats sont en cours de chargement..."
-                : "تم العثور على الملف! جاري تحميل نتائجك...";
+            alert.innerText = currentLang === 'fr' ? "Dossier trouvé ! Chargement..." : "تم العثور على الملف! جاري التحميل...";
             alert.classList.add('hidden');
         }
     </script>
